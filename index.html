@@ -35,15 +35,13 @@
         }
 
         .btn {
-            background: none !important;
-            border: none;
-            padding: 0;
-            margin: 15px auto;
+            all: unset;
             display: block;
-            cursor: pointer;
-            transition: 0.3s;
+            margin: 15px auto;
             max-width: 400px;
             width: 100%;
+            cursor: pointer;
+            transition: 0.3s;
         }
 
         .btn-full {
@@ -51,14 +49,14 @@
             height: auto;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: block;
         }
 
-        .btn:hover {
+        .btn:hover .btn-full {
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.3);
         }
 
-        /* Стили для шагов остаются без изменений */
         .step { 
             display: none; 
             text-align: left; 
@@ -188,30 +186,29 @@
 
     <div class="container" id="mainMenu">
         <!-- КНОПКИ-КАРТИНКИ -->
-        <button class="btn" onclick="window.location.href='tel:+79371809021'">
+        <div class="btn" onclick="window.location.href='tel:+79371809021'">
             <img src="assets/images/call-full.png" alt="Позвонить" class="btn-full">
-        </button>
+        </div>
         
-        <button class="btn" onclick="startSteps('sms')">
+        <div class="btn" onclick="startSteps('sms')">
             <img src="assets/images/sms-full.png" alt="SMS" class="btn-full">
-        </button>
+        </div>
         
-        <button class="btn" onclick="startSteps('wa')">
+        <div class="btn" onclick="startSteps('wa')">
             <img src="assets/images/whatsapp-full.png" alt="WhatsApp" class="btn-full">
-        </button>
+        </div>
         
-        <button class="btn" onclick="startSteps('tg')">
+        <div class="btn" onclick="startSteps('tg')">
             <img src="assets/images/telegram-full.png" alt="Telegram" class="btn-full">
-        </button>
+        </div>
         
-        <button class="btn" onclick="openGoldenRules()">
+        <div class="btn" onclick="openGoldenRules()">
             <img src="assets/images/rules-full.png" alt="Золотые правила" class="btn-full">
-        </button>
+        </div>
     </div>
 
-    <!-- ОСТАЛЬНОЙ КОД ОСТАЕТСЯ БЕЗ ИЗМЕНЕНИЙ -->
     <div class="container" id="stepsContainer">
-        <!-- Все шаги формы остаются как были -->
+        <!-- Шаг 1: Организация -->
         <div id="stepOrganization" class="step">
             <label>Выберите организацию, к которой относится нарушивший:</label>
             <div class="group-checkbox">
@@ -220,15 +217,90 @@
             </div>
         </div>
 
-        <!-- ... остальные шаги без изменений ... -->
-        
+        <!-- Шаг 2: Группа -->
+        <div id="stepGroup" class="step">
+            <label>Выберите группу:</label>
+            <div class="group-checkbox">
+                <label>Южная группа <input type="radio" name="group" value="Южная" onchange="handleGroupChange()"></label>
+                <label>Центральная группа <input type="radio" name="group" value="Центральная" onchange="handleGroupChange()"></label>
+                <label>Северная группа <input type="radio" name="group" value="Северная" onchange="handleGroupChange()"></label>
+                <label>ОДЦ <input type="radio" name="group" value="ОДЦ" onchange="handleGroupChange()"></label>
+            </div>
+        </div>
+
+        <!-- Шаг 3: Управление -->
+        <div id="stepManagement" class="step">
+            <label>Выберите управление:</label>
+            <select id="managementSelect" onchange="handleManagementChange()">
+                <option value="">-- выбрать --</option>
+                <option>Нет</option>
+                <option>Не знаю</option>
+                <option>УДНГ</option>
+                <option>УППН</option>
+                <option>ЦППД</option>
+                <option>УПКГ</option>
+                <option>УЭТ</option>
+                <option>ПСК</option>
+                <option>УКК</option>
+                <option>Блок Энергетика</option>
+            </select>
+        </div>
+
+        <!-- Шаг 4: Подрядная организация -->
+        <div id="stepContractor" class="step">
+            <label>Укажите наименование подрядной организации:</label>
+            <input type="text" id="contractorInput" placeholder="Введите название подрядной организации" oninput="handleContractorInput()">
+        </div>
+
+        <!-- Шаг 5: Цех -->
+        <div id="stepShop" class="step">
+            <label>Выберите или введите цех / участок / лабораторию:</label>
+            <select id="shopSelect" style="display:none;" onchange="handleShopSelect()">
+                <option value="">-- выбрать --</option>
+            </select>
+            <input type="text" id="shopInput" placeholder="Введите вручную" oninput="handleShopInput()">
+        </div>
+
+        <!-- Шаг 6: Область нарушения -->
+        <div id="stepArea" class="step">
+            <label>Область нарушения:</label>
+            <select id="areaSelect" onchange="handleAreaChange()">
+                <option value="">-- выбрать --</option>
+                <option>СИЗ</option>
+                <option>Инструктаж</option>
+                <option>Транспортная безопасность</option>
+                <option>Работы повышенной опасности</option>
+                <option>Пожарная безопасность</option>
+                <option>Передвижение по лестнице</option>
+                <option>Электробезопасность</option>
+            </select>
+        </div>
+
+        <!-- Шаг 7: Место нарушения -->
+        <div id="stepPlace" class="step">
+            <label>Объект/место нарушения:</label>
+            <input type="text" id="placeInput" placeholder="Укажите объект или место">
+            <div id="transportExtra" style="display:none;">
+                <label>Марка или гос.номер транспортного средства:</label>
+                <input type="text" id="transportInput" placeholder="Пример: УПСВ Мухановская, АГЗУ 241">
+            </div>
+        </div>
+
+        <!-- Шаг 8: Описание нарушения -->
+        <div id="stepDesc" class="step">
+            <label>Описание нарушения:</label>
+            <textarea id="descInput" placeholder="Опишите нарушение" rows="4"></textarea>
+        </div>
+
+        <!-- Кнопка отправки -->
+        <div id="stepSend" class="step">
+            <button onclick="sendMessage()">Отправить</button>
+        </div>
     </div>
 
     <button id="cancelButton" onclick="cancelSteps()">Главное меню</button>
 
-    <!-- JavaScript код остается полностью без изменений -->
     <script>
-        // Весь ваш JavaScript код из предыдущей версии
         const structures = {
             "УДНГ": ["ЦДНГ-2","ЦДНГ-3","ЦДНГ-4","ЦДНГ-5","ЦДНГ-6","ЦДНГ-7","ЦДНГ-8"],
             "УППН": ["ЦППН-1","ЦППН-3","ЦППН-4","ЦППН-5","ЦППН-6"],
@@ -240,7 +312,225 @@
             "Блок Энергетика": ["СРЭ","ЦЭОТ-2","ЦЭОТ-3","ЦЭЭ-5","ЦЭЭ-6"]
         };
 
-        // ... весь остальной JavaScript код без изменений ...
+        let selectedType = "";
+        let selectedGroup = "";
+        let selectedOrganization = "";
+
+        function startSteps(type){
+            selectedType = type;
+            document.getElementById('mainMenu').style.display = 'none';
+            document.getElementById('stepsContainer').style.display = 'block';
+            document.getElementById('cancelButton').style.display = 'block';
+            resetAllSteps();
+            document.getElementById('stepOrganization').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function resetAllSteps() {
+            document.querySelectorAll('.step').forEach(s => s.style.display = 'none');
+            document.querySelectorAll('input[name="organization"]').forEach(r => r.checked = false);
+            document.querySelectorAll('input[name="group"]').forEach(r => r.checked = false);
+            document.getElementById('managementSelect').value = '';
+            document.getElementById('contractorInput').value = '';
+            document.getElementById('shopSelect').value = '';
+            document.getElementById('shopInput').value = '';
+            document.getElementById('areaSelect').value = '';
+            document.getElementById('placeInput').value = '';
+            document.getElementById('transportInput').value = '';
+            document.getElementById('descInput').value = '';
+            document.getElementById('transportExtra').style.display = 'none';
+        }
+
+        function handleOrganizationChange(){ 
+            const orgRadio = document.querySelector('input[name="organization"]:checked');
+            selectedOrganization = orgRadio ? orgRadio.value : "";
+            resetStepsAfter('stepOrganization');
+            if (selectedOrganization === "Подрядная организация") {
+                document.getElementById('stepContractor').style.display = 'block';
+            } else {
+                document.getElementById('stepGroup').style.display = 'block';
+            }
+        }
+
+        function handleGroupChange(){
+            const groupRadio = document.querySelector('input[name="group"]:checked');
+            selectedGroup = groupRadio ? groupRadio.value : "";
+            resetStepsAfter('stepGroup');
+            document.getElementById('stepManagement').style.display = 'block';
+        }
+
+        function handleManagementChange(){
+            const management = document.getElementById('managementSelect').value;
+            if (!management) return;
+            resetStepsAfter('stepManagement');
+            if (selectedGroup === "ОДЦ") {
+                document.getElementById('stepArea').style.display = 'block';
+            } else {
+                const shopSelect = document.getElementById('shopSelect');
+                const shopInput = document.getElementById('shopInput');
+                document.getElementById('stepShop').style.display = 'block';
+                if (management === "Нет" || management === "Не знаю") {
+                    shopSelect.style.display = 'none';
+                    shopInput.style.display = 'block';
+                } else if (structures[management]) {
+                    shopInput.style.display = 'none';
+                    shopSelect.style.display = 'block';
+                    shopSelect.innerHTML = '<option value="">-- выбрать --</option>';
+                    structures[management].forEach(s => {
+                        const opt = document.createElement('option');
+                        opt.value = s;
+                        opt.textContent = s;
+                        shopSelect.appendChild(opt);
+                    });
+                } else {
+                    shopSelect.style.display = 'none';
+                    shopInput.style.display = 'none';
+                }
+            }
+        }
+
+        function handleContractorInput(){
+            const contractorValue = document.getElementById('contractorInput').value.trim();
+            if (contractorValue) {
+                resetStepsAfter('stepContractor');
+                document.getElementById('stepArea').style.display = 'block';
+            }
+        }
+
+        function handleShopSelect(){ 
+            if (document.getElementById('shopSelect').value) {
+                document.getElementById('stepArea').style.display = 'block';
+            }
+        }
+
+        function handleShopInput(){ 
+            document.getElementById('stepArea').style.display = 'block'; 
+        }
+
+        function handleAreaChange(){
+            const area = document.getElementById('areaSelect').value;
+            if (!area) return;
+            const transportExtra = document.getElementById('transportExtra');
+            if (area === "Транспортная безопасность") {
+                transportExtra.style.display = 'block';
+            } else {
+                transportExtra.style.display = 'none';
+            }
+            if (selectedGroup === "ОДЦ") {
+                document.getElementById('stepDesc').style.display = 'block';
+            } else {
+                document.getElementById('stepPlace').style.display = 'block';
+                document.getElementById('stepDesc').style.display = 'block';
+            }
+        }
+
+        function resetStepsAfter(stepId) {
+            const steps = [
+                'stepOrganization', 'stepGroup', 'stepManagement', 'stepContractor', 
+                'stepShop', 'stepArea', 'stepPlace', 'stepDesc', 'stepSend'
+            ];
+            const stepIndex = steps.indexOf(stepId);
+            if (stepIndex === -1) return;
+            for (let i = stepIndex + 1; i < steps.length; i++) {
+                document.getElementById(steps[i]).style.display = 'none';
+            }
+            if (stepId === 'stepOrganization') {
+                document.querySelectorAll('input[name="group"]').forEach(r => r.checked = false);
+                document.getElementById('managementSelect').value = '';
+                document.getElementById('contractorInput').value = '';
+                document.getElementById('shopSelect').value = '';
+                document.getElementById('shopInput').value = '';
+            }
+            if (stepId === 'stepGroup') {
+                document.getElementById('managementSelect').value = '';
+            }
+            if (stepId === 'stepManagement' || stepId === 'stepContractor') {
+                document.getElementById('shopSelect').value = '';
+                document.getElementById('shopInput').value = '';
+            }
+            if (['stepOrganization', 'stepGroup', 'stepManagement', 'stepContractor', 'stepShop'].includes(stepId)) {
+                document.getElementById('areaSelect').value = '';
+                document.getElementById('placeInput').value = '';
+                document.getElementById('transportInput').value = '';
+                document.getElementById('descInput').value = '';
+                document.getElementById('transportExtra').style.display = 'none';
+            }
+        }
+
+        function openGoldenRules() {
+            const pdfUrl = "https://drive.google.com/file/d/1ynvvmU8557HaYnfuFLHlZUbw6c4LGS8t/view?usp=sharing";
+            window.open(pdfUrl, '_blank');
+        }
+
+        document.getElementById('placeInput').addEventListener('input', () => {
+            document.getElementById('stepDesc').style.display = 'block';
+        });
+
+        document.getElementById('descInput').addEventListener('input', () => {
+            document.getElementById('stepSend').style.display = document.getElementById('descInput').value.trim() ? 'block' : 'none';
+        });
+
+        function sendMessage(){
+            const orgRadio = document.querySelector('input[name="organization"]:checked');
+            const groupRadio = document.querySelector('input[name="group"]:checked');
+            const organization = orgRadio ? orgRadio.value : "Не указано";
+            const group = groupRadio ? groupRadio.value : "Не указано";
+            const management = document.getElementById('managementSelect').value || "";
+            const contractor = document.getElementById('contractorInput').value || "";
+            let shop = "";
+            const shopSelect = document.getElementById('shopSelect');
+            const shopInput = document.getElementById('shopInput');
+            if (shopSelect.style.display !== 'none') {
+                shop = shopSelect.value || "";
+            } else if (shopInput.style.display !== 'none') {
+                shop = shopInput.value || "";
+            }
+            const area = document.getElementById('areaSelect').value || "";
+            const place = document.getElementById('placeInput').value || "";
+            const transport = document.getElementById('transportInput').value || "";
+            const desc = document.getElementById('descInput').value || "";
+
+            let message = `Сообщение о нарушении:\n\n`;
+            message += `Организация: ${organization}`;
+            if (organization === "АО «Самаранефтегаз»") {
+                message += `\nГруппа: ${group}`;
+                if (management) {
+                    message += `\nУправление: ${management}`;
+                }
+            }
+            if (organization === "Подрядная организация" && contractor) {
+                message += `\nНаименование подрядной организации: ${contractor}`;
+            }
+            if (organization === "АО «Самаранефтегаз»" && group !== "ОДЦ" && shop) {
+                message += `\nЦех/участок/лаборатория: ${shop}`;
+            }
+            message += `\nОбласть нарушения: ${area}`;
+            if (group !== "ОДЦ" && place) {
+                message += `\nОбъект/место: ${place}`;
+            }
+            if (area === "Транспортная безопасность" && transport) {
+                message += `\nМарка/гос.номер: ${transport}`;
+            }
+            message += `\n\nОписание нарушения:\n${desc}`;
+
+            if (selectedType === 'wa') {
+                window.open(`https://wa.me/79371809021?text=${encodeURIComponent(message)}`, '_blank');
+            } else if (selectedType === 'tg') {
+                const telegramUrl = `https://t.me/+79371809021?text=${encodeURIComponent(message)}`;
+                window.open(telegramUrl, '_blank');
+            } else if (selectedType === 'sms') {
+                window.location.href = `sms:+79371809021?body=${encodeURIComponent(message)}`;
+            }
+            cancelSteps();
+        }
+
+        function cancelSteps(){
+            document.getElementById('stepsContainer').style.display = 'none';
+            document.getElementById('mainMenu').style.display = 'block';
+            document.getElementById('cancelButton').style.display = 'none';
+            resetAllSteps();
+            window.scrollTo(0, 0);
+        }
     </script>
 </body>
 </html>
