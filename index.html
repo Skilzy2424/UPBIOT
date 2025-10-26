@@ -6,6 +6,7 @@
     <title>Сообщить о нарушении</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollSmoother.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -20,6 +21,17 @@
             line-height: 1.5;
         }
 
+        .wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .content {
+            will-change: transform;
+        }
+
         /* Герой секция */
         .hero-section {
             position: relative;
@@ -30,28 +42,25 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 40px;
+            padding: 0 20px;
             width: 100%;
         }
 
         .hero-image {
             position: absolute;
-            top: 50%;
+            top: 0;
             right: 0;
-            transform: translateY(-50%);
-            width: 45%;
-            height: 80%;
-            object-fit: contain;
+            width: 50%;
+            height: 100%;
+            object-fit: cover;
             z-index: 1;
         }
 
         .main-header {
             position: relative;
             z-index: 2;
-            width: 65%;
-            padding-right: 10%;
         }
 
         .hero-title {
@@ -76,7 +85,7 @@
         .hero-description {
             margin-top: 30px;
             font-size: 1.4rem;
-            max-width: 600px;
+            max-width: 500px;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
 
@@ -121,6 +130,7 @@
         .button-item {
             margin-bottom: 80px;
             opacity: 0;
+            transform: translateY(50px);
         }
 
         .button-content {
@@ -283,36 +293,11 @@
         }
 
         /* Адаптивность */
-        @media (max-width: 1024px) {
-            .hero-title {
-                font-size: 3rem;
-            }
-            
-            .title-middle {
-                font-size: 4rem;
-            }
-            
-            .hero-description {
-                font-size: 1.2rem;
-            }
-        }
-
         @media (max-width: 768px) {
-            .hero-section {
-                flex-direction: column;
-                justify-content: center;
-                text-align: center;
-            }
-            
-            .main-header {
-                width: 100%;
-                padding-right: 0;
-                margin-bottom: 40px;
-            }
-            
             .hero-title {
                 font-size: 2.5rem;
                 flex-direction: column;
+                text-align: center;
                 gap: 10px;
             }
             
@@ -322,151 +307,133 @@
             
             .hero-description {
                 font-size: 1.1rem;
+                text-align: center;
                 margin: 20px auto;
-            }
-            
-            .hero-image {
-                position: relative;
-                width: 80%;
-                height: auto;
-                transform: none;
-                margin: 0 auto;
             }
             
             .gallery {
                 flex-direction: column;
                 gap: 20px;
             }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 20px;
-            }
             
-            .hero-title {
-                font-size: 2rem;
-            }
-            
-            .title-middle {
-                font-size: 2.5rem;
-            }
-            
-            .hero-description {
-                font-size: 1rem;
+            .hero-image {
+                width: 100%;
+                height: 50%;
+                position: relative;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Главный контейнер -->
-    <div id="mainContent">
-        <!-- Герой секция -->
-        <header class="hero-section">
-            <div class="container">
-                <div class="main-header">
-                    <div class="hero-title">
-                        <div class="title-left">
-                            <span>СООБЩИТЬ</span>
+    <div class="wrapper">
+        <div class="content">
+            <!-- Герой секция -->
+            <header class="hero-section">
+                <img data-speed=".6" class="hero-image" src="assets/images/hero-background.png" alt="Фон">
+                <div class="container">
+                    <div data-speed=".75" class="main-header">
+                        <div class="hero-title">
+                            <div class="title-left">
+                                <span>СООБЩИТЬ</span>
+                            </div>
+                            <div class="title-middle">О</div>
+                            <div class="title-right">
+                                <span>НАРУШЕНИИ</span>
+                            </div>
                         </div>
-                        <div class="title-middle">О</div>
-                        <div class="title-right">
-                            <span>НАРУШЕНИИ</span>
-                        </div>
+                        <p class="hero-description">
+                            Ваша безопасность - наш приоритет. Сообщайте о нарушениях анонимно и быстро. 
+                            Вместе мы создадим безопасную рабочую среду для всех.
+                        </p>
                     </div>
-                    <p class="hero-description">
-                        Ваша безопасность - наш приоритет. Сообщайте о нарушениях анонимно и быстро. 
-                        Вместе мы создадим безопасную рабочую среду для всех.
-                    </p>
                 </div>
-            </div>
-            <img class="hero-image" src="assets/images/hero-background.png" alt="Фон">
-            <div class="scroll-indicator" id="scrollIndicator">
-                <p>Листайте вниз</p>
-                <span style="font-size: 2rem;">⬇️</span>
-            </div>
-        </header>
+                <div class="scroll-indicator" id="scrollIndicator">
+                    <p>Листайте вниз</p>
+                    <span style="font-size: 2rem;">⬇️</span>
+                </div>
+            </header>
 
-        <!-- Секция с кнопками -->
-        <div class="buttons-section">
-            <div class="container">
-                <main class="gallery">
-                    <div class="gallery__left">
-                        <!-- Звонок -->
-                        <div class="button-item" id="call-button">
-                            <div class="button-content">
-                                <div class="button-icon">
-                                    <img src="assets/images/call-full.png" alt="Позвонить" onclick="window.location.href='tel:+79371809021'">
+            <!-- Секция с кнопками -->
+            <div class="buttons-section">
+                <div class="container">
+                    <main class="gallery">
+                        <div data-speed=".9" class="gallery__left">
+                            <!-- Звонок -->
+                            <div class="button-item" id="call-button">
+                                <div class="button-content">
+                                    <div class="button-icon">
+                                        <img src="assets/images/call-full.png" alt="Позвонить" onclick="window.location.href='tel:+79371809021'">
+                                    </div>
+                                    <div class="button-text">
+                                        <h3>Прямой звонок</h3>
+                                        <p>Немедленная связь с ответственным лицом. Быстрое реагирование на критические ситуации.</p>
+                                    </div>
                                 </div>
-                                <div class="button-text">
-                                    <h3>Прямой звонок</h3>
-                                    <p>Немедленная связь с ответственным лицом. Быстрое реагирование на критические ситуации.</p>
+                            </div>
+
+                            <!-- SMS -->
+                            <div class="button-item" id="sms-button">
+                                <div class="button-content">
+                                    <div class="button-icon">
+                                        <img src="assets/images/sms-full.png" alt="SMS" onclick="startSteps('sms')">
+                                    </div>
+                                    <div class="button-text">
+                                        <h3>SMS сообщение</h3>
+                                        <p>Отправьте текстовое сообщение с подробным описанием нарушения. Удобно и конфиденциально.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Правила -->
+                            <div class="button-item" id="rules-button">
+                                <div class="button-content">
+                                    <div class="button-icon">
+                                        <img src="assets/images/rules-full.png" alt="Золотые правила" onclick="openGoldenRules()">
+                                    </div>
+                                    <div class="button-text">
+                                        <h3>Золотые правила</h3>
+                                        <p>Ознакомьтесь с основными правилами безопасности. Знание - лучшая профилактика нарушений.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- SMS -->
-                        <div class="button-item" id="sms-button">
-                            <div class="button-content">
-                                <div class="button-icon">
-                                    <img src="assets/images/sms-full.png" alt="SMS" onclick="startSteps('sms')">
-                                </div>
-                                <div class="button-text">
-                                    <h3>SMS сообщение</h3>
-                                    <p>Отправьте текстовое сообщение с подробным описанием нарушения. Удобно и конфиденциально.</p>
+                        <div data-speed="1.1" class="gallery__right">
+                            <!-- WhatsApp -->
+                            <div class="button-item" id="wa-button">
+                                <div class="button-content">
+                                    <div class="button-icon">
+                                        <img src="assets/images/whatsapp-full.png" alt="WhatsApp" onclick="startSteps('wa')">
+                                    </div>
+                                    <div class="button-text">
+                                        <h3>WhatsApp</h3>
+                                        <p>Быстрая отправка через популярный мессенджер. Возможность прикрепления фото и документов.</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Правила -->
-                        <div class="button-item" id="rules-button">
-                            <div class="button-content">
-                                <div class="button-icon">
-                                    <img src="assets/images/rules-full.png" alt="Золотые правила" onclick="openGoldenRules()">
-                                </div>
-                                <div class="button-text">
-                                    <h3>Золотые правила</h3>
-                                    <p>Ознакомьтесь с основными правилами безопасности. Знание - лучшая профилактика нарушений.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="gallery__right">
-                        <!-- WhatsApp -->
-                        <div class="button-item" id="wa-button">
-                            <div class="button-content">
-                                <div class="button-icon">
-                                    <img src="assets/images/whatsapp-full.png" alt="WhatsApp" onclick="startSteps('wa')">
-                                </div>
-                                <div class="button-text">
-                                    <h3>WhatsApp</h3>
-                                    <p>Быстрая отправка через популярный мессенджер. Возможность прикрепления фото и документов.</p>
+                            <!-- Telegram -->
+                            <div class="button-item" id="tg-button">
+                                <div class="button-content">
+                                    <div class="button-icon">
+                                        <img src="assets/images/telegram-full.png" alt="Telegram" onclick="startSteps('tg')">
+                                    </div>
+                                    <div class="button-text">
+                                        <h3>Telegram</h3>
+                                        <p>Безопасная и быстрая связь через Telegram. Поддержка различных форматов сообщений.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Telegram -->
-                        <div class="button-item" id="tg-button">
-                            <div class="button-content">
-                                <div class="button-icon">
-                                    <img src="assets/images/telegram-full.png" alt="Telegram" onclick="startSteps('tg')">
-                                </div>
-                                <div class="button-text">
-                                    <h3>Telegram</h3>
-                                    <p>Безопасная и быстрая связь через Telegram. Поддержка различных форматов сообщений.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </main>
+                    </main>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Форма -->
     <div class="form-container" id="stepsContainer">
-        <!-- Шаги формы -->
+        <!-- Шаги формы остаются такими же -->
         <div id="stepOrganization" class="step">
             <label>Выберите организацию, к которой относится нарушивший:</label>
             <div class="group-checkbox">
@@ -482,10 +449,34 @@
 
     <script>
         // Инициализация GSAP
-        gsap.registerPlugin(ScrollTrigger);
+        gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-        // Анимация появления кнопок при скролле
+        // Создаем плавный скролл
+        const smoother = ScrollSmoother.create({
+            wrapper: '.wrapper',
+            content: '.content',
+            smooth: 1.5,
+            effects: true
+        });
+
+        // Параллакс эффект для элементов
         document.addEventListener('DOMContentLoaded', function() {
+            // Параллакс для изображения и заголовка
+            gsap.utils.toArray('[data-speed]').forEach(element => {
+                const speed = element.getAttribute('data-speed');
+                
+                ScrollTrigger.create({
+                    trigger: element,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    onUpdate: self => {
+                        const y = (1 - self.progress) * 100 * speed;
+                        gsap.set(element, { y: `${y}%` });
+                    }
+                });
+            });
+
+            // Анимация появления кнопок
             const buttonItems = gsap.utils.toArray('.button-item');
             
             buttonItems.forEach((item, index) => {
@@ -520,7 +511,7 @@
             });
         });
 
-        // Функции для работы формы
+        // Функции для работы формы (остаются без изменений)
         const structures = {
             "УДНГ": ["ЦДНГ-2","ЦДНГ-3","ЦДНГ-4","ЦДНГ-5","ЦДНГ-6","ЦДНГ-7","ЦДНГ-8"],
             "УППН": ["ЦППН-1","ЦППН-3","ЦППН-4","ЦППН-5","ЦППН-6"],
@@ -538,7 +529,7 @@
 
         function startSteps(type){
             selectedType = type;
-            document.getElementById('mainContent').style.display = 'none';
+            document.querySelector('.wrapper').style.display = 'none';
             document.getElementById('stepsContainer').style.display = 'block';
             document.getElementById('cancelButton').style.display = 'block';
             resetAllSteps();
@@ -555,7 +546,7 @@
         function cancelSteps(){
             document.getElementById('stepsContainer').style.display = 'none';
             document.getElementById('cancelButton').style.display = 'none';
-            document.getElementById('mainContent').style.display = 'block';
+            document.querySelector('.wrapper').style.display = 'block';
             resetAllSteps();
         }
 
