@@ -15,7 +15,7 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background: #2c2b2b;
             color: white;
             overflow-x: hidden;
         }
@@ -38,7 +38,7 @@
             position: relative;
         }
 
-        .hero-content h1 {
+        .hero-title {
             font-size: 5rem;
             margin-bottom: 30px;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
@@ -47,6 +47,20 @@
             letter-spacing: 1px;
             position: relative;
             z-index: 3;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .title-left, .title-right {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .title-middle {
+            font-size: 6rem;
+            color: #ffd200;
+            margin: 0 15px;
         }
 
         .hero-content p {
@@ -84,6 +98,12 @@
             transform: translateX(-50%);
             animation: bounce 2s infinite;
             z-index: 2;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .scroll-indicator.faded {
+            opacity: 0;
         }
 
         @keyframes bounce {
@@ -275,8 +295,12 @@
                 padding: 0 30px;
             }
             
-            .hero-content h1 {
+            .hero-title {
                 font-size: 4rem;
+            }
+            
+            .title-middle {
+                font-size: 5rem;
             }
             
             .hero-content p {
@@ -287,31 +311,43 @@
         @media (max-width: 768px) {
             .hero {
                 padding: 0 20px;
-                height: 80vh; /* Уменьшаем высоту на мобильных */
+                height: 80vh;
             }
             
             .hero-content {
-                flex: 0 0 55%; /* Текст занимает 55% */
+                flex: 0 0 55%;
             }
             
-            .hero-content h1 {
-                font-size: 2.5rem; /* Уменьшаем шрифт */
-                margin-bottom: 20px;
+            .hero-title {
+                font-size: 2.5rem;
+                flex-direction: column;
+                text-align: center;
+                gap: 5px;
+            }
+            
+            .title-middle {
+                font-size: 3rem;
+                margin: 10px 0;
+            }
+            
+            .title-left, .title-right {
+                flex-direction: row;
+                gap: 5px;
             }
             
             .hero-content p {
-                font-size: 1rem; /* Уменьшаем шрифт */
+                font-size: 1rem;
                 max-width: 100%;
             }
             
             .hero-image {
-                flex: 0 0 40%; /* Изображение занимает 40% */
-                height: 60%; /* Уменьшаем высоту изображения */
+                flex: 0 0 40%;
+                height: 60%;
             }
             
             .hero-image::before {
                 background-position: center right;
-                left: -20px; /* Меньший сдвиг на мобильных */
+                left: -20px;
             }
 
             .button-item {
@@ -337,11 +373,15 @@
         @media (max-width: 480px) {
             .hero {
                 padding: 0 15px;
-                height: 70vh; /* Еще меньше на маленьких телефонах */
+                height: 70vh;
             }
             
-            .hero-content h1 {
+            .hero-title {
                 font-size: 2rem;
+            }
+            
+            .title-middle {
+                font-size: 2.5rem;
             }
             
             .hero-content p {
@@ -356,21 +396,6 @@
                 left: -10px;
             }
         }
-
-        /* Для очень маленьких экранов */
-        @media (max-width: 360px) {
-            .hero {
-                padding: 0 10px;
-            }
-            
-            .hero-content h1 {
-                font-size: 1.8rem;
-            }
-            
-            .hero-content p {
-                font-size: 0.8rem;
-            }
-        }
     </style>
 </head>
 <body>
@@ -379,11 +404,19 @@
         <!-- Герой секция -->
         <section class="hero">
             <div class="hero-content">
-                <h1>СООБЩИТЬ О НАРУШЕНИИ</h1>
+                <div class="hero-title">
+                    <div class="title-left">
+                        <span>СООБЩИТЬ</span>
+                    </div>
+                    <div class="title-middle">О</div>
+                    <div class="title-right">
+                        <span>НАРУШЕНИИ</span>
+                    </div>
+                </div>
                 <p>Ваша безопасность - наш приоритет. Сообщайте о нарушениях анонимно и быстро. Вместе мы создадим безопасную рабочую среду для всех.</p>
             </div>
             <div class="hero-image"></div>
-            <div class="scroll-indicator">
+            <div class="scroll-indicator" id="scrollIndicator">
                 <p>Листайте вниз</p>
                 <span style="font-size: 2rem;">⬇️</span>
             </div>
@@ -548,6 +581,19 @@
 
         // Анимация появления кнопок при скролле
         document.addEventListener('DOMContentLoaded', function() {
+            // Анимация плавного затухания индикатора при скролле
+            gsap.to('#scrollIndicator', {
+                opacity: 0,
+                duration: 0.5,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: '.buttons-section',
+                    start: "top 80%",
+                    end: "top 50%",
+                    toggleActions: "play none none none"
+                }
+            });
+
             // Анимация для каждой кнопки
             const buttonItems = gsap.utils.toArray('.button-item');
             
