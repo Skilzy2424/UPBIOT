@@ -15,7 +15,7 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: #2c2b2b;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             color: white;
             overflow-x: hidden;
         }
@@ -24,60 +24,25 @@
         .hero {
             height: 100vh;
             display: flex;
-            align-items: center;
-            padding: 0 50px;
-            position: relative;
-        }
-
-        .hero-content {
-            flex: 0 0 60%;
-            text-align: left;
-            z-index: 3;
-            position: relative;
-            padding-right: 5%;
-        }
-
-        .hero-title {
-            font-size: 5rem;
-            margin-bottom: 30px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
-            line-height: 1.1;
-            font-weight: bold;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .title-left, .title-right {
-            display: flex;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
         }
 
-        .title-middle {
-            font-size: 6rem;
-            color: #ffd200;
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .hero-content p {
-            font-size: 1.4rem;
-            line-height: 1.7;
+            font-size: 1.2rem;
+            max-width: 600px;
+            line-height: 1.6;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-            max-width: 500px;
-        }
-
-        .hero-image {
-            flex: 0 0 40%;
-            height: 70vh;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            object-position: right center;
         }
 
         .scroll-indicator {
@@ -86,12 +51,11 @@
             left: 50%;
             transform: translateX(-50%);
             animation: bounce 2s infinite;
-            z-index: 4;
             opacity: 1;
             transition: opacity 0.5s ease;
         }
 
-        .scroll-indicator.faded {
+        .scroll-indicator.hidden {
             opacity: 0;
         }
 
@@ -111,8 +75,6 @@
         .buttons-section {
             min-height: 100vh;
             padding: 50px 20px;
-            position: relative;
-            z-index: 1;
         }
 
         .button-item {
@@ -122,7 +84,7 @@
             max-width: 1200px;
             margin: 0 auto 100px;
             min-height: 200px;
-            opacity: 0;
+            opacity: 0; /* Изначально скрыты */
         }
 
         .button-item:nth-child(even) {
@@ -177,8 +139,6 @@
             border-radius: 20px;
             color: #333;
             box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            position: relative;
-            z-index: 1;
         }
 
         .step {
@@ -283,89 +243,28 @@
         }
 
         /* Адаптивность */
-        @media (max-width: 1024px) {
-            .hero {
-                padding: 0 30px;
-            }
-            
-            .hero-title {
-                font-size: 4rem;
-            }
-            
-            .title-middle {
-                font-size: 5rem;
-            }
-            
-            .hero-content p {
-                font-size: 1.2rem;
-            }
-        }
-
         @media (max-width: 768px) {
-            .hero {
-                padding: 0 20px;
-                height: 80vh;
-                flex-direction: column;
-                justify-content: center;
-            }
-            
-            .hero-content {
-                flex: none;
-                width: 100%;
-                text-align: center;
-                margin-bottom: 30px;
-                padding-right: 0;
-            }
-            
-            .hero-title {
-                font-size: 2.5rem;
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .title-middle {
-                font-size: 3rem;
-                margin: 10px 0;
-            }
-            
-            .title-left, .title-right {
-                flex-direction: row;
-                gap: 5px;
-            }
-            
-            .hero-content p {
-                font-size: 1rem;
-                max-width: 100%;
-                margin: 0 auto;
-            }
-            
-            .hero-image {
-                flex: none;
-                width: 100%;
-                height: 300px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero {
-                padding: 0 15px;
-                height: 70vh;
-            }
-            
-            .hero-title {
+            .hero-content h1 {
                 font-size: 2rem;
             }
-            
-            .title-middle {
-                font-size: 2.5rem;
+
+            .button-item {
+                flex-direction: column !important;
+                text-align: center;
+                margin-bottom: 60px;
             }
-            
-            .hero-content p {
-                font-size: 0.9rem;
+
+            .button-icon {
+                flex: none;
+                margin-bottom: 20px;
             }
-            
-            .hero-image {
-                height: 200px;
+
+            .button-text {
+                padding: 20px;
+            }
+
+            .button-text h3 {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -376,21 +275,10 @@
         <!-- Герой секция -->
         <section class="hero">
             <div class="hero-content">
-                <div class="hero-title">
-                    <div class="title-left">
-                        <span>СООБЩИТЬ</span>
-                    </div>
-                    <div class="title-middle">О</div>
-                    <div class="title-right">
-                        <span>НАРУШЕНИИ</span>
-                    </div>
-                </div>
+                <h1>Сообщить о нарушении</h1>
                 <p>Ваша безопасность - наш приоритет. Сообщайте о нарушениях анонимно и быстро. Вместе мы создадим безопасную рабочую среду для всех.</p>
             </div>
-            <div class="hero-image">
-                <img src="assets/images/hero-background.png" alt="Фоновое изображение">
-            </div>
-            <div class="scroll-indicator" id="scrollIndicator">
+            <div class="scroll-indicator">
                 <p>Листайте вниз</p>
                 <span style="font-size: 2rem;">⬇️</span>
             </div>
@@ -553,21 +441,31 @@
         // Инициализация GSAP и ScrollTrigger
         gsap.registerPlugin(ScrollTrigger);
 
+        // Анимация указателя "листай вниз"
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        
+        // Создаем анимацию для указателя прокрутки
+        gsap.to(scrollIndicator, {
+            opacity: 0,
+            duration: 0.5,
+            scrollTrigger: {
+                trigger: '.hero',
+                start: 'top top',
+                end: 'bottom top',
+                scrub: true,
+                onUpdate: (self) => {
+                    // Показываем указатель при прокрутке вверх
+                    if (self.direction === -1) {
+                        scrollIndicator.classList.remove('hidden');
+                    } else {
+                        scrollIndicator.classList.add('hidden');
+                    }
+                }
+            }
+        });
+
         // Анимация появления кнопок при скролле
         document.addEventListener('DOMContentLoaded', function() {
-            // Анимация плавного затухания индикатора при скролле
-            gsap.to('#scrollIndicator', {
-                opacity: 0,
-                duration: 0.5,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: '.buttons-section',
-                    start: "top 80%",
-                    end: "top 50%",
-                    toggleActions: "play none none none"
-                }
-            });
-
             // Анимация для каждой кнопки
             const buttonItems = gsap.utils.toArray('.button-item');
             
@@ -616,7 +514,7 @@
             });
         });
 
-        // Функции для работы формы остаются без изменений
+        // Функции для работы формы
         const structures = {
             "УДНГ": ["ЦДНГ-2","ЦДНГ-3","ЦДНГ-4","ЦДНГ-5","ЦДНГ-6","ЦДНГ-7","ЦДНГ-8"],
             "УППН": ["ЦППН-1","ЦППН-3","ЦППН-4","ЦППН-5","ЦППН-6"],
@@ -634,7 +532,9 @@
 
         function startSteps(type){
             selectedType = type;
+            // Скрываем весь анимированный контент
             document.getElementById('mainContent').style.display = 'none';
+            // Показываем форму
             document.getElementById('stepsContainer').style.display = 'block';
             document.getElementById('cancelButton').style.display = 'block';
             resetAllSteps();
@@ -657,7 +557,196 @@
             document.getElementById('transportExtra').style.display = 'none';
         }
 
-        // Остальные функции формы остаются без изменений...
+        function handleOrganizationChange(){ 
+            const orgRadio = document.querySelector('input[name="organization"]:checked');
+            selectedOrganization = orgRadio ? orgRadio.value : "";
+            resetStepsAfter('stepOrganization');
+            if (selectedOrganization === "Подрядная организация") {
+                document.getElementById('stepContractor').style.display = 'block';
+            } else {
+                document.getElementById('stepGroup').style.display = 'block';
+            }
+        }
+
+        function handleGroupChange(){
+            const groupRadio = document.querySelector('input[name="group"]:checked');
+            selectedGroup = groupRadio ? groupRadio.value : "";
+            resetStepsAfter('stepGroup');
+            document.getElementById('stepManagement').style.display = 'block';
+        }
+
+        function handleManagementChange(){
+            const management = document.getElementById('managementSelect').value;
+            if (!management) return;
+            resetStepsAfter('stepManagement');
+            if (selectedGroup === "ОДЦ") {
+                document.getElementById('stepArea').style.display = 'block';
+            } else {
+                const shopSelect = document.getElementById('shopSelect');
+                const shopInput = document.getElementById('shopInput');
+                document.getElementById('stepShop').style.display = 'block';
+                if (management === "Нет" || management === "Не знаю") {
+                    shopSelect.style.display = 'none';
+                    shopInput.style.display = 'block';
+                } else if (structures[management]) {
+                    shopInput.style.display = 'none';
+                    shopSelect.style.display = 'block';
+                    shopSelect.innerHTML = '<option value="">-- выбрать --</option>';
+                    structures[management].forEach(s => {
+                        const opt = document.createElement('option');
+                        opt.value = s;
+                        opt.textContent = s;
+                        shopSelect.appendChild(opt);
+                    });
+                } else {
+                    shopSelect.style.display = 'none';
+                    shopInput.style.display = 'none';
+                }
+            }
+        }
+
+        function handleContractorInput(){
+            const contractorValue = document.getElementById('contractorInput').value.trim();
+            if (contractorValue) {
+                resetStepsAfter('stepContractor');
+                document.getElementById('stepArea').style.display = 'block';
+            }
+        }
+
+        function handleShopSelect(){ 
+            if (document.getElementById('shopSelect').value) {
+                document.getElementById('stepArea').style.display = 'block';
+            }
+        }
+
+        function handleShopInput(){ 
+            document.getElementById('stepArea').style.display = 'block'; 
+        }
+
+        function handleAreaChange(){
+            const area = document.getElementById('areaSelect').value;
+            if (!area) return;
+            const transportExtra = document.getElementById('transportExtra');
+            if (area === "Транспортная безопасность") {
+                transportExtra.style.display = 'block';
+            } else {
+                transportExtra.style.display = 'none';
+            }
+            if (selectedGroup === "ОДЦ") {
+                document.getElementById('stepDesc').style.display = 'block';
+            } else {
+                document.getElementById('stepPlace').style.display = 'block';
+                document.getElementById('stepDesc').style.display = 'block';
+            }
+        }
+
+        function resetStepsAfter(stepId) {
+            const steps = [
+                'stepOrganization', 'stepGroup', 'stepManagement', 'stepContractor', 
+                'stepShop', 'stepArea', 'stepPlace', 'stepDesc', 'stepSend'
+            ];
+            const stepIndex = steps.indexOf(stepId);
+            if (stepIndex === -1) return;
+            for (let i = stepIndex + 1; i < steps.length; i++) {
+                document.getElementById(steps[i]).style.display = 'none';
+            }
+            if (stepId === 'stepOrganization') {
+                document.querySelectorAll('input[name="group"]').forEach(r => r.checked = false);
+                document.getElementById('managementSelect').value = '';
+                document.getElementById('contractorInput').value = '';
+                document.getElementById('shopSelect').value = '';
+                document.getElementById('shopInput').value = '';
+            }
+            if (stepId === 'stepGroup') {
+                document.getElementById('managementSelect').value = '';
+            }
+            if (stepId === 'stepManagement' || stepId === 'stepContractor') {
+                document.getElementById('shopSelect').value = '';
+                document.getElementById('shopInput').value = '';
+            }
+            if (['stepOrganization', 'stepGroup', 'stepManagement', 'stepContractor', 'stepShop'].includes(stepId)) {
+                document.getElementById('areaSelect').value = '';
+                document.getElementById('placeInput').value = '';
+                document.getElementById('transportInput').value = '';
+                document.getElementById('descInput').value = '';
+                document.getElementById('transportExtra').style.display = 'none';
+            }
+        }
+
+        function openGoldenRules() {
+            const pdfUrl = "https://drive.google.com/file/d/1ynvvmU8557HaYnfuFLHlZUbw6c4LGS8t/view?usp=sharing";
+            window.open(pdfUrl, '_blank');
+        }
+
+        document.getElementById('placeInput').addEventListener('input', () => {
+            document.getElementById('stepDesc').style.display = 'block';
+        });
+
+        document.getElementById('descInput').addEventListener('input', () => {
+            document.getElementById('stepSend').style.display = document.getElementById('descInput').value.trim() ? 'block' : 'none';
+        });
+
+        function sendMessage(){
+            const orgRadio = document.querySelector('input[name="organization"]:checked');
+            const groupRadio = document.querySelector('input[name="group"]:checked');
+            const organization = orgRadio ? orgRadio.value : "Не указано";
+            const group = groupRadio ? groupRadio.value : "Не указано";
+            const management = document.getElementById('managementSelect').value || "";
+            const contractor = document.getElementById('contractorInput').value || "";
+            let shop = "";
+            const shopSelect = document.getElementById('shopSelect');
+            const shopInput = document.getElementById('shopInput');
+            if (shopSelect.style.display !== 'none') {
+                shop = shopSelect.value || "";
+            } else if (shopInput.style.display !== 'none') {
+                shop = shopInput.value || "";
+            }
+            const area = document.getElementById('areaSelect').value || "";
+            const place = document.getElementById('placeInput').value || "";
+            const transport = document.getElementById('transportInput').value || "";
+            const desc = document.getElementById('descInput').value || "";
+
+            let message = `Сообщение о нарушении:\n\n`;
+            message += `Организация: ${organization}`;
+            if (organization === "АО «Самаранефтегаз»") {
+                message += `\nГруппа: ${group}`;
+                if (management) {
+                    message += `\nУправление: ${management}`;
+                }
+            }
+            if (organization === "Подрядная организация" && contractor) {
+                message += `\nНаименование подрядной организации: ${contractor}`;
+            }
+            if (organization === "АО «Самаранефтегаз»" && group !== "ОДЦ" && shop) {
+                message += `\nЦех/участок/лаборатория: ${shop}`;
+            }
+            message += `\nОбласть нарушения: ${area}`;
+            if (group !== "ОДЦ" && place) {
+                message += `\nОбъект/место: ${place}`;
+            }
+            if (area === "Транспортная безопасность" && transport) {
+                message += `\nМарка/гос.номер: ${transport}`;
+            }
+            message += `\n\nОписание нарушения:\n${desc}`;
+
+            if (selectedType === 'wa') {
+                window.open(`https://wa.me/79371809021?text=${encodeURIComponent(message)}`, '_blank');
+            } else if (selectedType === 'tg') {
+                const telegramUrl = `https://t.me/+79371809021?text=${encodeURIComponent(message)}`;
+                window.open(telegramUrl, '_blank');
+            } else if (selectedType === 'sms') {
+                window.location.href = `sms:+79371809021?body=${encodeURIComponent(message)}`;
+            }
+            cancelSteps();
+        }
+
+        function cancelSteps(){
+            document.getElementById('stepsContainer').style.display = 'none';
+            document.getElementById('cancelButton').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+            resetAllSteps();
+            window.scrollTo(0, 0);
+        }
     </script>
 </body>
 </html>
