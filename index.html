@@ -20,15 +20,16 @@
             top: 0;
             z-index: 100;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: white; /* Добавим фон на случай прозрачности изображения */
         }
         
         .header-image {
             width: 100%;
             height: auto;
             display: block;
-            /* Ограничиваем высоту шапки */
-            max-height: 200px;
-            object-fit: cover;
+            /* Сбалансированные ограничения высоты */
+            max-height: 180px; /* По умолчанию для средних экранов */
+            object-fit: contain; /* Полное отображение без обрезки */
         }
 
         .container { 
@@ -177,18 +178,18 @@
         /* Для компьютеров */
         @media (min-width: 769px) {
             .header-image {
-                max-height: 150px; /* Еще меньше на компьютере */
+                max-height: 140px; /* Компактнее на компьютерах */
             }
             
             .container {
-                margin-top: 10px;
+                margin-top: 15px;
             }
         }
 
         /* Для мобильных */
-        @media (max-width: 480px) {
+        @media (max-width: 768px) {
             .header-image {
-                max-height: 120px; /* Маленькая на мобильных */
+                max-height: 120px; /* Компактно на мобильных */
             }
             
             .container {
@@ -197,7 +198,7 @@
             }
             
             .btn {
-                max-width: 280px;
+                max-width: 320px;
             }
             
             .step {
@@ -206,10 +207,30 @@
             }
         }
 
+        /* Для очень маленьких мобильных */
+        @media (max-width: 480px) {
+            .header-image {
+                max-height: 100px; /* Еще компактнее */
+            }
+            
+            .btn {
+                max-width: 280px;
+            }
+        }
+
         /* Для очень больших экранов */
         @media (min-width: 1200px) {
             .header-image {
+                max-height: 160px; /* Немного больше на больших экранах */
+            }
+        }
+
+        /* Для огромных экранов - ограничим максимальный размер */
+        @media (min-width: 1600px) {
+            .header-image {
                 max-height: 180px;
+                max-width: 1200px; /* Не даем растягиваться слишком широко */
+                margin: 0 auto;
             }
         }
     </style>
