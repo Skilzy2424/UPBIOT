@@ -20,7 +20,7 @@
             overflow-x: hidden;
         }
 
-        /* Герой секция с картинкой */
+        /* Герой секция с адаптивной картинкой */
         .hero {
             height: 100vh;
             display: flex;
@@ -241,8 +241,17 @@
 
         /* Адаптивность для мобильных */
         @media (max-width: 768px) {
+            .hero {
+                background: 
+                    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                    url('assets/images/header-bg.jpg') center/contain no-repeat,
+                    #121212; /* Фон на случай если картинка не загрузится */
+                background-size: contain; /* Не обрезает, показывает всю картинку */
+                padding-top: 60px;
+            }
+
             .scroll-indicator {
-                bottom: 100px;
+                bottom: 40px; /* Поднял выше на мобильных */
             }
 
             .button-item {
@@ -263,19 +272,38 @@
             .button-text h3 {
                 font-size: 1.5rem;
             }
-
-            .hero {
-                padding-top: 40px;
-            }
         }
 
         @media (max-width: 480px) {
-            .scroll-indicator {
-                bottom: 120px;
-            }
-            
             .hero {
+                background: 
+                    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                    url('assets/images/header-bg.jpg') center/contain no-repeat,
+                    #121212;
                 padding: 20px;
+            }
+
+            .scroll-indicator {
+                bottom: 30px;
+            }
+
+            .button-icon .icon-box {
+                width: 200px;
+                height: 200px;
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Для очень высоких или очень широких экранов */
+        @media (max-height: 600px) {
+            .hero {
+                background-size: cover; /* На очень низких экранах используем cover */
+            }
+        }
+
+        @media (min-width: 2000px) {
+            .hero {
+                background-size: cover; /* На очень широких экранах используем cover */
             }
         }
     </style>
