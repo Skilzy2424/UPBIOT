@@ -26,11 +26,11 @@
             overflow-x: hidden;
         }
 
-        /* Шапка с фиксированной шириной */
+        /* Шапка с правильным размером */
         .header {
             background: url('assets/images/header-bg.jpg') center/cover no-repeat;
             background-attachment: scroll;
-            height: 200px;
+            height: 400px; /* Увеличил высоту */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -38,13 +38,15 @@
             width: 100%;
             max-width: 100vw;
             overflow: hidden;
-            transition: opacity 0.3s ease; /* Анимация для скрытия */
+            transition: all 0.5s ease;
         }
 
         .header.hidden {
             opacity: 0;
             height: 0;
             overflow: hidden;
+            margin: 0;
+            padding: 0;
         }
 
         .header-content {
@@ -54,8 +56,8 @@
         }
 
         .header h1 {
-            font-size: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            font-size: 3rem; /* Увеличил размер текста */
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
         }
 
         /* Секция с кнопками */
@@ -101,7 +103,7 @@
             justify-content: center;
             font-size: 3rem;
             cursor: pointer;
-            transition: all 0.6s ease;
+            transition: all 0.8s ease; /* Более плавная анимация */
             box-shadow: 0 8px 25px rgba(0,0,0,0.5);
             margin: 0 auto;
         }
@@ -255,7 +257,7 @@
         /* Адаптивность для мобильных */
         @media (max-width: 768px) {
             .header {
-                height: 150px;
+                height: 250px; /* Уменьшил высоту для планшетов */
             }
 
             .header.hidden {
@@ -263,7 +265,7 @@
             }
 
             .header h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
 
             .button-item {
@@ -296,7 +298,7 @@
 
         @media (max-width: 480px) {
             .header {
-                height: 120px;
+                height: 200px; /* Уменьшил высоту для телефонов */
             }
 
             .header.hidden {
@@ -304,7 +306,7 @@
             }
 
             .header h1 {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
 
             .button-icon .icon-box {
@@ -321,7 +323,7 @@
         /* Для очень маленьких экранов */
         @media (max-width: 320px) {
             .header {
-                height: 100px;
+                height: 150px;
             }
             
             .header.hidden {
@@ -329,7 +331,7 @@
             }
 
             .header h1 {
-                font-size: 1.3rem;
+                font-size: 1.5rem;
             }
 
             .button-icon .icon-box {
@@ -526,40 +528,54 @@
         // Инициализация GSAP и ScrollTrigger
         gsap.registerPlugin(ScrollTrigger);
 
-        // Анимация появления кнопок при скролле с разной скоростью для появления и исчезновения
+        // Анимация появления кнопок при скролле - более медленная и плавная
         document.addEventListener('DOMContentLoaded', function() {
             const buttonItems = gsap.utils.toArray('.button-item');
             
             buttonItems.forEach((item, index) => {
                 const direction = index % 2 === 0 ? -100 : 100;
                 
-                // Анимация с разной скоростью для появления и исчезновения
+                // Более медленная и плавная анимация
                 gsap.fromTo(item, {
                     x: direction,
-                    opacity: 0
+                    opacity: 0,
+                    scale: 0.9
                 }, {
                     x: 0,
                     opacity: 1,
-                    duration: 1.5, // Медленное появление при скролле вниз
+                    scale: 1,
+                    duration: 2, // Увеличил до 2 секунд
                     ease: "power2.out",
                     scrollTrigger: {
                         trigger: item,
                         start: "top 85%",
                         end: "bottom 20%",
-                        toggleActions: "play reverse play reverse", // reverse - быстрее
+                        toggleActions: "play reverse play reverse",
                         onEnter: () => {
-                            // Медленное появление
-                            gsap.to(item, { opacity: 1, x: 0, duration: 1.5, ease: "power2.out" });
+                            // Медленное плавное появление
+                            gsap.to(item, { 
+                                opacity: 1, 
+                                x: 0, 
+                                scale: 1,
+                                duration: 2, 
+                                ease: "power2.out" 
+                            });
                         },
                         onLeaveBack: () => {
                             // Быстрое исчезновение при скролле вверх
-                            gsap.to(item, { opacity: 0, x: direction, duration: 0.5, ease: "power2.in" });
+                            gsap.to(item, { 
+                                opacity: 0, 
+                                x: direction, 
+                                scale: 0.9,
+                                duration: 0.5, 
+                                ease: "power2.in" 
+                            });
                         }
                     }
                 });
             });
 
-            // Дополнительная анимация для иконок и текста с разной скоростью
+            // Дополнительная анимация для иконок и текста - более медленная и плавная
             buttonItems.forEach((item, index) => {
                 const icon = item.querySelector('.button-icon');
                 const text = item.querySelector('.button-text');
@@ -571,13 +587,13 @@
                         end: "bottom 30%",
                         toggleActions: "play reverse play reverse",
                         onEnter: () => {
-                            // Медленное появление
+                            // Медленное плавное появление
                             gsap.to([icon, text], { 
                                 x: 0, 
                                 opacity: 1, 
-                                duration: 1.2, 
+                                duration: 1.8, // Увеличил длительность
                                 ease: "power2.out",
-                                stagger: 0.2
+                                stagger: 0.3 // Увеличил задержку между элементами
                             });
                         },
                         onLeaveBack: () => {
@@ -615,13 +631,17 @@
 
         function startSteps(type){
             selectedType = type;
-            // Скрываем шапку
-            document.getElementById('mainHeader').classList.add('hidden');
+            // Скрываем шапку - исправленная версия
+            const header = document.getElementById('mainHeader');
+            header.classList.add('hidden');
+            
             // Скрываем весь анимированный контент
             document.getElementById('mainContent').style.display = 'none';
+            
             // Показываем форму
             document.getElementById('stepsContainer').style.display = 'block';
             document.getElementById('cancelButton').style.display = 'block';
+            
             resetAllSteps();
             document.getElementById('stepOrganization').style.display = 'block';
             window.scrollTo(0, 0);
@@ -629,7 +649,9 @@
 
         function cancelSteps(){
             // Показываем шапку обратно
-            document.getElementById('mainHeader').classList.remove('hidden');
+            const header = document.getElementById('mainHeader');
+            header.classList.remove('hidden');
+            
             document.getElementById('stepsContainer').style.display = 'none';
             document.getElementById('cancelButton').style.display = 'none';
             document.getElementById('mainContent').style.display = 'block';
