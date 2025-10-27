@@ -166,6 +166,14 @@
             resize: vertical;
         }
 
+        /* Специальные стили для полей ввода места нарушения */
+        #stepPlace textarea {
+            min-height: 80px;
+            padding: 15px;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
         .step textarea {
             min-height: 100px;
         }
@@ -297,6 +305,13 @@
             
             .step textarea {
                 min-height: 80px;
+            }
+
+            /* Адаптивность для шага места нарушения */
+            #stepPlace textarea {
+                min-height: 70px;
+                padding: 12px;
+                font-size: 14px;
             }
         }
 
@@ -503,10 +518,10 @@
             <!-- Шаг 7: Место нарушения -->
             <div id="stepPlace" class="step">
                 <label>Объект/место нарушения:</label>
-                <input type="text" id="placeInput" placeholder="Например: УПН Алакаевская, здание операторной">
-                <div id="transportExtra" style="display:none; margin-top: 15px;">
+                <textarea id="placeInput" placeholder="Например: УПН Алакаевская, здание операторной" rows="2"></textarea>
+                <div id="transportExtra" style="display:none; margin-top: 20px;">
                     <label>Марка или гос.номер транспортного средства:</label>
-                    <input type="text" id="transportInput" placeholder="Пример: УПСВ Мухановская, АГЗУ 241">
+                    <textarea id="transportInput" placeholder="Пример: УПСВ Мухановская, АГЗУ 241" rows="2"></textarea>
                 </div>
             </div>
 
@@ -810,7 +825,7 @@
                     message += `\nУправление: ${management}`;
                 }
             }
-            if (organization === "Подрядная организации" && contractor) {
+            if (organization === "Подрядная организация" && contractor) {
                 message += `\nНаименование подрядной организации: ${contractor}`;
             }
             if (organization === "АО «Самаранефтегаз»" && group !== "ОДЦ" && shop) {
