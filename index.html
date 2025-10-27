@@ -28,14 +28,15 @@
 
         /* Шапка с PNG изображением */
         .header {
-            background: url('assets/images/header-bg.png') center/cover no-repeat;
-            background-color: #121212;
+            background: url('assets/images/header-bg.png') center/contain no-repeat;
+            background-color: #1a1a1a;
             height: 400px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             width: 100%;
+            max-width: 100vw;
             overflow: hidden;
             transition: all 0.5s ease;
         }
@@ -49,10 +50,21 @@
         }
 
         .header-content {
-            display: none;
+            text-align: center;
+            z-index: 2;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 0 20px;
         }
 
-        /* Секция с кнопками */
+        .header h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+        }
+
+        /* Остальные стили без изменений */
         .buttons-section {
             min-height: 100vh;
             padding: 50px 20px;
@@ -60,6 +72,7 @@
             position: relative;
             z-index: 1;
             width: 100%;
+            max-width: 100vw;
             overflow: hidden;
         }
 
@@ -122,7 +135,6 @@
             color: #ccc;
         }
 
-        /* Форма */
         .form-container {
             display: none;
             max-width: 500px;
@@ -249,11 +261,20 @@
         @media (max-width: 768px) {
             .header {
                 height: 250px;
-                background-size: cover;
+                background-size: contain;
             }
 
             .header.hidden {
                 height: 0;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .header-content {
+                margin: 0 15px;
+                padding: 15px;
             }
 
             .button-item {
@@ -287,11 +308,20 @@
         @media (max-width: 480px) {
             .header {
                 height: 200px;
-                background-size: cover;
+                background-size: contain;
             }
 
             .header.hidden {
                 height: 0;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header-content {
+                margin: 0 10px;
+                padding: 10px;
             }
 
             .button-icon .icon-box {
@@ -308,11 +338,15 @@
         @media (max-width: 320px) {
             .header {
                 height: 150px;
-                background-size: cover;
+                background-size: contain;
             }
             
             .header.hidden {
                 height: 0;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
             }
 
             .button-icon .icon-box {
@@ -322,19 +356,27 @@
             }
         }
 
+        /* Для очень широких экранов - используем cover чтобы заполнить пространство */
+        @media (min-width: 1921px) {
+            .header {
+                background-size: cover;
+            }
+        }
+
         /* Гарантируем, что ничего не выходит за пределы экрана */
         .container {
             width: 100%;
+            max-width: 100vw;
             overflow: hidden;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Шапка с PNG изображением -->
+        <!-- Шапка -->
         <header class="header" id="mainHeader">
             <div class="header-content">
-                <!-- Контент в изображении -->
+                <h1>Сообщить о нарушении</h1>
             </div>
         </header>
 
@@ -781,7 +823,7 @@
 
         document.getElementById('descInput').addEventListener('input', () => {
             document.getElementById('stepSend').style.display = document.getElementById('descInput').value.trim() ? 'block' : 'none';
-        }
+        });
 
         function sendMessage(){
             const orgRadio = document.querySelector('input[name="organization"]:checked');
