@@ -20,15 +20,16 @@
             overflow-x: hidden;
         }
 
-        /* Герой секция с адаптивной картинкой */
+        /* Герой секция с картинкой */
         .hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start; /* Изменено с center на flex-start */
             align-items: center;
             text-align: center;
             padding: 20px;
+            padding-top: 60px; /* Отступ сверху для контента */
             position: relative;
             background: 
                 linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
@@ -37,7 +38,7 @@
 
         .scroll-indicator {
             position: absolute;
-            bottom: 80px;
+            bottom: 40px; /* Поднял выше */
             left: 50%;
             transform: translateX(-50%);
             animation: bounce 2s infinite;
@@ -242,16 +243,15 @@
         /* Адаптивность для мобильных */
         @media (max-width: 768px) {
             .hero {
+                justify-content: flex-start; /* Контент начинается сверху */
+                padding-top: 40px; /* Меньший отступ на мобильных */
                 background: 
                     linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                    url('assets/images/header-bg.jpg') center/contain no-repeat,
-                    #121212; /* Фон на случай если картинка не загрузится */
-                background-size: contain; /* Не обрезает, показывает всю картинку */
-                padding-top: 60px;
+                    url('assets/images/header-bg.jpg') center/cover no-repeat;
             }
 
             .scroll-indicator {
-                bottom: 40px; /* Поднял выше на мобильных */
+                bottom: 30px; /* Еще выше на мобильных */
             }
 
             .button-item {
@@ -276,15 +276,12 @@
 
         @media (max-width: 480px) {
             .hero {
-                background: 
-                    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                    url('assets/images/header-bg.jpg') center/contain no-repeat,
-                    #121212;
-                padding: 20px;
+                padding-top: 30px;
+                padding-bottom: 80px; /* Добавил отступ снизу для указателя */
             }
 
             .scroll-indicator {
-                bottom: 30px;
+                bottom: 20px;
             }
 
             .button-icon .icon-box {
@@ -294,16 +291,10 @@
             }
         }
 
-        /* Для очень высоких или очень широких экранов */
-        @media (max-height: 600px) {
+        /* Для очень высоких экранов */
+        @media (min-height: 800px) {
             .hero {
-                background-size: cover; /* На очень низких экранах используем cover */
-            }
-        }
-
-        @media (min-width: 2000px) {
-            .hero {
-                background-size: cover; /* На очень широких экранах используем cover */
+                justify-content: center; /* На высоких экранах можно центрировать */
             }
         }
     </style>
@@ -313,6 +304,7 @@
     <div id="mainContent">
         <!-- Герой секция с картинкой -->
         <section class="hero">
+            <!-- Контент теперь начинается сверху -->
             <div class="scroll-indicator">
                 <p>Листайте вниз</p>
                 <span style="font-size: 2rem;">⬇️</span>
