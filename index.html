@@ -517,7 +517,7 @@
 
             <!-- Шаг 7: Место нарушения -->
             <div id="stepPlace" class="step">
-                <label>Объект/место нарушения:</label>
+                <label id="placeLabel">Объект/место нарушения:</label>
                 <textarea id="placeInput" placeholder="Например: УПН Алакаевская, здание операторной" rows="2"></textarea>
                 <div id="transportExtra" style="display:none; margin-top: 20px;">
                     <label>Марка или гос.номер транспортного средства:</label>
@@ -666,6 +666,9 @@
             document.getElementById('transportInput').value = '';
             document.getElementById('descInput').value = '';
             document.getElementById('transportExtra').style.display = 'none';
+            // Сбрасываем текст метки к исходному состоянию
+            document.getElementById('placeLabel').textContent = "Объект/место нарушения:";
+            document.getElementById('placeInput').placeholder = "Например: УПН Алакаевская, здание операторной";
         }
 
         function handleOrganizationChange(){ 
@@ -743,12 +746,19 @@
             } else {
                 transportExtra.style.display = 'none';
             }
+            
+            // Меняем текст в зависимости от выбранной группы
+            const placeLabel = document.getElementById('placeLabel');
             if (selectedGroup === "ОДЦ") {
-                document.getElementById('stepDesc').style.display = 'block';
+                placeLabel.textContent = "Место нарушения:";
+                document.getElementById('placeInput').placeholder = "Например: офисное здание, кабинет 305";
             } else {
-                document.getElementById('stepPlace').style.display = 'block';
-                document.getElementById('stepDesc').style.display = 'block';
+                placeLabel.textContent = "Объект/место нарушения:";
+                document.getElementById('placeInput').placeholder = "Например: УПН Алакаевская, здание операторной";
             }
+            
+            document.getElementById('stepPlace').style.display = 'block';
+            document.getElementById('stepDesc').style.display = 'block';
         }
 
         function resetStepsAfter(stepId) {
@@ -767,6 +777,9 @@
                 document.getElementById('contractorInput').value = '';
                 document.getElementById('shopSelect').value = '';
                 document.getElementById('shopInput').value = '';
+                // Сбрасываем текст метки к исходному состоянию
+                document.getElementById('placeLabel').textContent = "Объект/место нарушения:";
+                document.getElementById('placeInput').placeholder = "Например: УПН Алакаевская, здание операторной";
             }
             if (stepId === 'stepGroup') {
                 document.getElementById('managementSelect').value = '';
