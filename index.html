@@ -26,11 +26,11 @@
             overflow-x: hidden;
         }
 
-        /* Шапка с правильным размером */
+        /* Шапка с правильным отображением изображения */
         .header {
-            background: url('assets/images/header-bg.jpg') center/cover no-repeat;
-            background-attachment: scroll;
-            height: 400px; /* Увеличил высоту */
+            background: url('assets/images/header-bg.jpg') center/contain no-repeat;
+            background-color: #1a1a1a; /* Фон на случай если изображение не загрузится */
+            height: 400px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -53,10 +53,14 @@
             text-align: center;
             z-index: 2;
             width: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон для текста */
+            padding: 20px;
+            border-radius: 10px;
+            margin: 0 20px;
         }
 
         .header h1 {
-            font-size: 3rem; /* Увеличил размер текста */
+            font-size: 3rem;
             text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
         }
 
@@ -103,7 +107,7 @@
             justify-content: center;
             font-size: 3rem;
             cursor: pointer;
-            transition: all 0.8s ease; /* Более плавная анимация */
+            transition: all 0.8s ease;
             box-shadow: 0 8px 25px rgba(0,0,0,0.5);
             margin: 0 auto;
         }
@@ -257,7 +261,8 @@
         /* Адаптивность для мобильных */
         @media (max-width: 768px) {
             .header {
-                height: 250px; /* Уменьшил высоту для планшетов */
+                height: 250px;
+                background-size: contain; /* Сохраняем полное изображение */
             }
 
             .header.hidden {
@@ -266,6 +271,11 @@
 
             .header h1 {
                 font-size: 2.2rem;
+            }
+
+            .header-content {
+                margin: 0 15px;
+                padding: 15px;
             }
 
             .button-item {
@@ -298,7 +308,8 @@
 
         @media (max-width: 480px) {
             .header {
-                height: 200px; /* Уменьшил высоту для телефонов */
+                height: 200px;
+                background-size: contain;
             }
 
             .header.hidden {
@@ -307,6 +318,11 @@
 
             .header h1 {
                 font-size: 1.8rem;
+            }
+
+            .header-content {
+                margin: 0 10px;
+                padding: 10px;
             }
 
             .button-icon .icon-box {
@@ -320,10 +336,10 @@
             }
         }
 
-        /* Для очень маленьких экранов */
         @media (max-width: 320px) {
             .header {
                 height: 150px;
+                background-size: contain;
             }
             
             .header.hidden {
@@ -338,6 +354,13 @@
                 width: 180px;
                 height: 180px;
                 font-size: 2rem;
+            }
+        }
+
+        /* Для очень широких экранов - используем cover чтобы заполнить пространство */
+        @media (min-width: 1921px) {
+            .header {
+                background-size: cover;
             }
         }
 
@@ -544,7 +567,7 @@
                     x: 0,
                     opacity: 1,
                     scale: 1,
-                    duration: 2, // Увеличил до 2 секунд
+                    duration: 2,
                     ease: "power2.out",
                     scrollTrigger: {
                         trigger: item,
@@ -591,9 +614,9 @@
                             gsap.to([icon, text], { 
                                 x: 0, 
                                 opacity: 1, 
-                                duration: 1.8, // Увеличил длительность
+                                duration: 1.8,
                                 ease: "power2.out",
-                                stagger: 0.3 // Увеличил задержку между элементами
+                                stagger: 0.3
                             });
                         },
                         onLeaveBack: () => {
@@ -631,7 +654,7 @@
 
         function startSteps(type){
             selectedType = type;
-            // Скрываем шапку - исправленная версия
+            // Скрываем шапку
             const header = document.getElementById('mainHeader');
             header.classList.add('hidden');
             
