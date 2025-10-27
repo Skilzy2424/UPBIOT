@@ -64,7 +64,7 @@
             text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
         }
 
-        /* Остальные стили без изменений */
+        /* Секция с кнопками */
         .buttons-section {
             min-height: 100vh;
             padding: 50px 20px;
@@ -135,6 +135,7 @@
             color: #ccc;
         }
 
+        /* Форма */
         .form-container {
             display: none;
             max-width: 500px;
@@ -260,8 +261,8 @@
         /* Адаптивность для мобильных */
         @media (max-width: 768px) {
             .header {
-                height: 250px;
-                background-size: contain;
+                height: 400px; /* Такая же высота как на десктопе */
+                background-size: cover; /* Заполняем весь контейнер */
             }
 
             .header.hidden {
@@ -307,8 +308,8 @@
 
         @media (max-width: 480px) {
             .header {
-                height: 200px;
-                background-size: contain;
+                height: 400px; /* Такая же высота как на десктопе */
+                background-size: cover; /* Заполняем весь контейнер */
             }
 
             .header.hidden {
@@ -337,8 +338,8 @@
 
         @media (max-width: 320px) {
             .header {
-                height: 150px;
-                background-size: contain;
+                height: 400px; /* Такая же высота как на десктопе */
+                background-size: cover; /* Заполняем весь контейнер */
             }
             
             .header.hidden {
