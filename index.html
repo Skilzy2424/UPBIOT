@@ -25,20 +25,18 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* Изменено с center на flex-start */
+            justify-content: flex-start;
             align-items: center;
             text-align: center;
             padding: 20px;
-            padding-top: 60px; /* Отступ сверху для контента */
+            padding-top: 60px;
             position: relative;
-            background: 
-                linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-                url('assets/images/header-bg.jpg') center/cover no-repeat;
+            background: url('assets/images/header-bg.jpg') center/cover no-repeat;
         }
 
         .scroll-indicator {
             position: absolute;
-            bottom: 40px; /* Поднял выше */
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
             animation: bounce 2s infinite;
@@ -243,15 +241,14 @@
         /* Адаптивность для мобильных */
         @media (max-width: 768px) {
             .hero {
-                justify-content: flex-start; /* Контент начинается сверху */
-                padding-top: 40px; /* Меньший отступ на мобильных */
-                background: 
-                    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                    url('assets/images/header-bg.jpg') center/cover no-repeat;
+                justify-content: flex-start;
+                padding-top: 40px;
+                background: url('assets/images/header-bg.jpg') center/contain no-repeat;
+                background-color: #121212; /* Фон на случай если картинка не загрузится */
             }
 
             .scroll-indicator {
-                bottom: 30px; /* Еще выше на мобильных */
+                bottom: 30px;
             }
 
             .button-item {
@@ -277,7 +274,9 @@
         @media (max-width: 480px) {
             .hero {
                 padding-top: 30px;
-                padding-bottom: 80px; /* Добавил отступ снизу для указателя */
+                padding-bottom: 80px;
+                background: url('assets/images/header-bg.jpg') center/contain no-repeat;
+                background-color: #121212;
             }
 
             .scroll-indicator {
@@ -294,7 +293,7 @@
         /* Для очень высоких экранов */
         @media (min-height: 800px) {
             .hero {
-                justify-content: center; /* На высоких экранах можно центрировать */
+                justify-content: center;
             }
         }
     </style>
