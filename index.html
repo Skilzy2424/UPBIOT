@@ -26,9 +26,9 @@
             overflow-x: hidden;
         }
 
-        /* Шапка с заполненным изображением - ИСПРАВЛЕНО */
+        /* Шапка с PNG изображением */
         .header {
-            background: url('assets/images/header-bg.jpg') center/cover no-repeat;
+            background: url('assets/images/header-bg.png') center/cover no-repeat;
             background-color: #121212;
             height: 400px;
             display: flex;
@@ -36,8 +36,6 @@
             justify-content: center;
             position: relative;
             width: 100%;
-            max-width: 1920px; /* Ограничиваем ширину */
-            margin: 0 auto; /* Центрируем */
             overflow: hidden;
             transition: all 0.5s ease;
         }
@@ -333,7 +331,7 @@
 </head>
 <body>
     <div class="container">
-        <!-- Шапка с изображением -->
+        <!-- Шапка с PNG изображением -->
         <header class="header" id="mainHeader">
             <div class="header-content">
                 <!-- Контент в изображении -->
@@ -783,7 +781,7 @@
 
         document.getElementById('descInput').addEventListener('input', () => {
             document.getElementById('stepSend').style.display = document.getElementById('descInput').value.trim() ? 'block' : 'none';
-        });
+        }
 
         function sendMessage(){
             const orgRadio = document.querySelector('input[name="organization"]:checked');
