@@ -239,6 +239,11 @@
             transform: translateY(-2px);
         }
 
+        /* Специальный стиль для поля места нарушения */
+        #placeInput {
+            font-size: 14px !important;
+        }
+
         /* Адаптивность для мобильных */
         @media (max-width: 768px) {
             .header {
@@ -282,6 +287,11 @@
                 font-size: 14px;
                 padding: 12px 15px;
             }
+
+            /* Уменьшаем шрифт для поля места нарушения на мобильных */
+            #placeInput {
+                font-size: 13px !important;
+            }
         }
 
         @media (max-width: 480px) {
@@ -308,6 +318,11 @@
                 font-size: 13px;
                 padding: 10px 12px;
             }
+
+            /* Еще меньше на очень маленьких экранах */
+            #placeInput {
+                font-size: 12px !important;
+            }
         }
 
         @media (max-width: 320px) {
@@ -324,6 +339,11 @@
             .button-icon .icon-box {
                 width: 180px;
                 height: 180px;
+            }
+
+            /* Минимальный размер шрифта */
+            #placeInput {
+                font-size: 11px !important;
             }
         }
 
@@ -382,7 +402,7 @@
                     </div>
                     <div class="button-text">
                         <h3>WhatsApp</h3>
-                        <p>Нажмите на иконку, заполните форму и отправте сообщение через мессенджер дежурному сотруднику ПБОТОС.</p>
+                        <p>Нажмите на иконку, заполните форму и отправте сообщение через WhatsApp дежурному сотруднику ПБОТОС.</p>
                     </div>
                 </div>
 
@@ -395,7 +415,7 @@
                     </div>
                     <div class="button-text">
                         <h3>Telegram</h3>
-                        <p>Нажмите на иконку, заполните форму и отправте сообщение через мессенджер дежурному сотруднику ПБОТОС.</p>
+                        <p>Нажмите на иконку, заполните форму и отправте сообщение через Telegram дежурному сотруднику ПБОТОС.</p>
                     </div>
                 </div>
 
@@ -794,7 +814,7 @@
                     message += `\nУправление: ${management}`;
                 }
             }
-            if (organization === "Подрядная организация" && contractor) {
+            if (organization === "Подрядная организации" && contractor) {
                 message += `\nНаименование подрядной организации: ${contractor}`;
             }
             if (organization === "АО «Самаранефтегаз»" && group !== "ОДЦ" && shop) {
