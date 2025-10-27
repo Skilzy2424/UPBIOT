@@ -18,11 +18,17 @@
             background: #121212;
             color: white;
             overflow-x: hidden;
+            height: 100%;
         }
 
-        /* Шапка */
+        html {
+            height: 100%;
+        }
+
+        /* Шапка с фиксированным фоном */
         .header {
             background: url('assets/images/header-bg.jpg') center/cover no-repeat;
+            background-attachment: fixed; /* Фон зафиксирован */
             height: 200px;
             display: flex;
             align-items: center;
@@ -45,6 +51,8 @@
             min-height: 100vh;
             padding: 50px 20px;
             background: #121212;
+            position: relative;
+            z-index: 1;
         }
 
         .button-item {
@@ -77,7 +85,7 @@
             justify-content: center;
             font-size: 3rem;
             cursor: pointer;
-            transition: all 0.6s ease; /* Более плавная анимация */
+            transition: all 0.6s ease;
             box-shadow: 0 8px 25px rgba(0,0,0,0.5);
         }
 
@@ -114,6 +122,8 @@
             border-radius: 20px;
             color: #333;
             box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
         }
 
         .step {
@@ -221,6 +231,9 @@
         @media (max-width: 768px) {
             .header {
                 height: 150px;
+                background-attachment: scroll; /* На мобильных отключаем fixed */
+                background-position: center;
+                background-size: cover;
             }
 
             .header h1 {
@@ -250,6 +263,7 @@
         @media (max-width: 480px) {
             .header {
                 height: 120px;
+                background-attachment: scroll;
             }
 
             .header h1 {
@@ -260,6 +274,17 @@
                 width: 200px;
                 height: 200px;
                 font-size: 2.5rem;
+            }
+        }
+
+        /* Для очень маленьких экранов */
+        @media (max-width: 320px) {
+            .header {
+                height: 100px;
+            }
+            
+            .header h1 {
+                font-size: 1.3rem;
             }
         }
     </style>
@@ -455,11 +480,11 @@
                 }, {
                     x: 0,
                     opacity: 1,
-                    duration: 1.5, // Увеличил с 1 до 1.5 секунд
-                    ease: "power2.out", // Более плавное замедление
+                    duration: 1.5,
+                    ease: "power2.out",
                     scrollTrigger: {
                         trigger: item,
-                        start: "top 85%", // Начинается позже
+                        start: "top 85%",
                         end: "bottom 20%",
                         toggleActions: "play none none reverse"
                     }
@@ -482,10 +507,10 @@
 
                 tl.fromTo(icon, 
                     { x: -50, opacity: 0 },
-                    { x: 0, opacity: 1, duration: 1.2, ease: "power2.out" } // Замедлил
+                    { x: 0, opacity: 1, duration: 1.2, ease: "power2.out" }
                 ).fromTo(text,
                     { x: 50, opacity: 0 },
-                    { x: 0, opacity: 1, duration: 1.2, ease: "power2.out" }, // Замедлил
+                    { x: 0, opacity: 1, duration: 1.2, ease: "power2.out" },
                     "-=0.6"
                 );
             });
@@ -509,9 +534,7 @@
 
         function startSteps(type){
             selectedType = type;
-            // Скрываем весь анимированный контент
             document.getElementById('mainContent').style.display = 'none';
-            // Показываем форму
             document.getElementById('stepsContainer').style.display = 'block';
             document.getElementById('cancelButton').style.display = 'block';
             resetAllSteps();
