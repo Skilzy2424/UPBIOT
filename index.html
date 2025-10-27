@@ -222,6 +222,7 @@
             width: 100%;
             box-sizing: border-box;
             white-space: nowrap;
+            font-size: 16px;
         }
 
         .group-checkbox input[type="radio"] {
@@ -253,7 +254,7 @@
             transform: translateY(-2px);
         }
 
-        /* Адаптивность для мобильных */
+        /* Адаптивность для мобильных - ТОЛЬКО ДЛЯ ШАГОВ */
         @media (max-width: 768px) {
             .header {
                 height: 300px;
@@ -290,28 +291,45 @@
             .form-container {
                 width: calc(100% - 20px);
                 margin: 50px 10px;
+                padding: 25px;
+            }
+
+            /* УВЕЛИЧЕНИЕ ТОЛЬКО В ШАГАХ */
+            .step {
+                padding: 20px;
+                margin: 15px 0;
+            }
+
+            .step label {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
             }
 
             .group-checkbox label {
-                font-size: 14px;
-                padding: 12px 15px;
+                font-size: 1.1rem;
+                padding: 18px 15px;
             }
 
-            .step input, .step textarea {
-                padding: 12px;
-                min-height: 45px;
-                font-size: 14px;
+            .step select, .step input, .step textarea {
+                padding: 16px;
+                min-height: 55px;
+                font-size: 1.1rem;
             }
             
             .step textarea {
-                min-height: 80px;
+                min-height: 90px;
             }
 
             /* Адаптивность для шага места нарушения */
             #stepPlace textarea {
-                min-height: 70px;
-                padding: 12px;
-                font-size: 14px;
+                min-height: 80px;
+                padding: 16px;
+                font-size: 1.1rem;
+            }
+
+            .step button {
+                font-size: 1.1rem;
+                padding: 18px 30px;
             }
         }
 
@@ -335,9 +353,27 @@
                 padding: 30px 10px;
             }
 
+            .form-container {
+                padding: 20px;
+            }
+
+            /* УВЕЛИЧЕНИЕ ТОЛЬКО В ШАГАХ */
+            .step {
+                padding: 18px;
+            }
+
+            .step label {
+                font-size: 1.1rem;
+            }
+
             .group-checkbox label {
-                font-size: 13px;
-                padding: 10px 12px;
+                font-size: 1rem;
+                padding: 16px 12px;
+            }
+
+            .step select, .step input, .step textarea {
+                padding: 14px;
+                font-size: 1rem;
             }
         }
 
@@ -355,6 +391,15 @@
             .button-icon .icon-box {
                 width: 180px;
                 height: 180px;
+            }
+
+            /* УВЕЛИЧЕНИЕ ТОЛЬКО В ШАГАХ */
+            .step label {
+                font-size: 1rem;
+            }
+
+            .group-checkbox label {
+                font-size: 0.95rem;
             }
         }
 
@@ -754,8 +799,8 @@
             
             if (selectedGroup === "ОДЦ") {
                 placeLabel.textContent = "Место нарушения:";
-                document.getElementById('placeInput').placeholder = "Например: 4 этаж,лестница или 13 этаж,ландшафт";
-                descInput.placeholder = "Например: Работник (Ф.И.О если знаете) не держался за поручень при передвижении по лестнице";
+                document.getElementById('placeInput').placeholder = "Например: 4 этаж: лестница или 7 этаж: ландшафт";
+                descInput.placeholder = "Например: Работник (Ф.И.О. если знаете) не держался за поручень при передвижении по лестнице";
             } else {
                 placeLabel.textContent = "Объект/место нарушения:";
                 document.getElementById('placeInput').placeholder = "Например: УПН Алакаевская, здание операторной";
