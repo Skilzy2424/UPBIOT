@@ -669,6 +669,7 @@
             // Сбрасываем текст метки к исходному состоянию
             document.getElementById('placeLabel').textContent = "Объект/место нарушения:";
             document.getElementById('placeInput').placeholder = "Например: УПН Алакаевская, здание операторной";
+            document.getElementById('descInput').placeholder = "Например: Работник (Ф.И.О. если знаете) передвигался по территории объекта без каски";
         }
 
         function handleOrganizationChange(){ 
@@ -749,12 +750,16 @@
             
             // Меняем текст в зависимости от выбранной группы
             const placeLabel = document.getElementById('placeLabel');
+            const descInput = document.getElementById('descInput');
+            
             if (selectedGroup === "ОДЦ") {
                 placeLabel.textContent = "Место нарушения:";
-                document.getElementById('placeInput').placeholder = "Например: офисное здание, кабинет 305";
+                document.getElementById('placeInput').placeholder = "Например: 4 этаж,лестница или 13 этаж,ландшафт";
+                descInput.placeholder = "Например: Работник (Ф.И.О если знаете) не держался за поручень при передвижении по лестнице";
             } else {
                 placeLabel.textContent = "Объект/место нарушения:";
                 document.getElementById('placeInput').placeholder = "Например: УПН Алакаевская, здание операторной";
+                descInput.placeholder = "Например: Работник (Ф.И.О. если знаете) передвигался по территории объекта без каски";
             }
             
             document.getElementById('stepPlace').style.display = 'block';
@@ -780,6 +785,7 @@
                 // Сбрасываем текст метки к исходному состоянию
                 document.getElementById('placeLabel').textContent = "Объект/место нарушения:";
                 document.getElementById('placeInput').placeholder = "Например: УПН Алакаевская, здание операторной";
+                document.getElementById('descInput').placeholder = "Например: Работник (Ф.И.О. если знаете) передвигался по территории объекта без каски";
             }
             if (stepId === 'stepGroup') {
                 document.getElementById('managementSelect').value = '';
