@@ -162,6 +162,12 @@
             font-size: 16px;
             transition: border-color 0.3s;
             box-sizing: border-box;
+            min-height: 50px;
+            resize: vertical;
+        }
+
+        .step textarea {
+            min-height: 100px;
         }
 
         .step select:focus, .step input:focus, .step textarea:focus {
@@ -239,11 +245,6 @@
             transform: translateY(-2px);
         }
 
-        /* Специальный стиль для поля места нарушения */
-        #placeInput {
-            font-size: 14px !important;
-        }
-
         /* Адаптивность для мобильных */
         @media (max-width: 768px) {
             .header {
@@ -288,9 +289,14 @@
                 padding: 12px 15px;
             }
 
-            /* Уменьшаем шрифт для поля места нарушения на мобильных */
-            #placeInput {
-                font-size: 13px !important;
+            .step input, .step textarea {
+                padding: 12px;
+                min-height: 45px;
+                font-size: 14px;
+            }
+            
+            .step textarea {
+                min-height: 80px;
             }
         }
 
@@ -318,11 +324,6 @@
                 font-size: 13px;
                 padding: 10px 12px;
             }
-
-            /* Еще меньше на очень маленьких экранах */
-            #placeInput {
-                font-size: 12px !important;
-            }
         }
 
         @media (max-width: 320px) {
@@ -339,11 +340,6 @@
             .button-icon .icon-box {
                 width: 180px;
                 height: 180px;
-            }
-
-            /* Минимальный размер шрифта */
-            #placeInput {
-                font-size: 11px !important;
             }
         }
 
@@ -508,7 +504,7 @@
             <div id="stepPlace" class="step">
                 <label>Объект/место нарушения:</label>
                 <input type="text" id="placeInput" placeholder="Например: УПН Алакаевская, здание операторной">
-                <div id="transportExtra" style="display:none;">
+                <div id="transportExtra" style="display:none; margin-top: 15px;">
                     <label>Марка или гос.номер транспортного средства:</label>
                     <input type="text" id="transportInput" placeholder="Пример: УПСВ Мухановская, АГЗУ 241">
                 </div>
