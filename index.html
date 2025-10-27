@@ -355,8 +355,8 @@
                         </div>
                     </div>
                     <div class="button-text">
-                        <h3>Прямой звонок</h3>
-                        <p>Немедленная связь с ответственным лицом. Быстрое реагирование на критические ситуации.</p>
+                        <h3>Позвонить</h3>
+                        <p>Нажмите на иконку, чтобы связаться и сообщить о нарушении дежурному сотруднику ПБОТОС.</p>
                     </div>
                 </div>
 
@@ -369,7 +369,7 @@
                     </div>
                     <div class="button-text">
                         <h3>SMS сообщение</h3>
-                        <p>Отправьте текстовое сообщение с подробным описанием нарушения. Удобно и конфиденциально.</p>
+                        <p>Нажмите на иконку,заполните форму и отправте SMS сообщение дежурному сотруднику ПБОТОС.</p>
                     </div>
                 </div>
 
@@ -382,7 +382,7 @@
                     </div>
                     <div class="button-text">
                         <h3>WhatsApp</h3>
-                        <p>Быстрая отправка через популярный мессенджер. Возможность прикрепления фото и документов.</p>
+                        <p>Нажмите на иконку,заполните форму и отправте сообщение через мессенджер дежурному сотруднику ПБОТОС.</p>
                     </div>
                 </div>
 
@@ -395,7 +395,7 @@
                     </div>
                     <div class="button-text">
                         <h3>Telegram</h3>
-                        <p>Безопасная и быстрая связь через Telegram. Поддержка различных форматов сообщений.</p>
+                        <p>Нажмите на иконку,заполните форму и отправте сообщение через мессенджер дежурному сотруднику ПБОТОС.</p>
                     </div>
                 </div>
 
@@ -441,11 +441,11 @@
                 <label>Выберите управление:</label>
                 <select id="managementSelect" onchange="handleManagementChange()">
                     <option value="">-- выбрать --</option>
-                    <option>Нет</option>
+                    <option>Нет в списке</option>
                     <option>Не знаю</option>
                     <option>УДНГ</option>
                     <option>УППН</option>
-                    <option>ЦППД</option>
+                    <option>УППД</option>
                     <option>УПКГ</option>
                     <option>УЭТ</option>
                     <option>ПСК</option>
@@ -457,7 +457,7 @@
             <!-- Шаг 4: Подрядная организация -->
             <div id="stepContractor" class="step">
                 <label>Укажите наименование подрядной организации:</label>
-                <input type="text" id="contractorInput" placeholder="Введите название подрядной организации" oninput="handleContractorInput()">
+                <input type="text" id="contractorInput" placeholder="Например: ООО Восток" oninput="handleContractorInput()">
             </div>
 
             <!-- Шаг 5: Цех -->
@@ -487,7 +487,7 @@
             <!-- Шаг 7: Место нарушения -->
             <div id="stepPlace" class="step">
                 <label>Объект/место нарушения:</label>
-                <input type="text" id="placeInput" placeholder="Укажите объект или место">
+                <input type="text" id="placeInput" placeholder="Например: УПН Алакаевская, здание операторной">
                 <div id="transportExtra" style="display:none;">
                     <label>Марка или гос.номер транспортного средства:</label>
                     <input type="text" id="transportInput" placeholder="Пример: УПСВ Мухановская, АГЗУ 241">
@@ -497,7 +497,7 @@
             <!-- Шаг 8: Описание нарушения -->
             <div id="stepDesc" class="step">
                 <label>Описание нарушения:</label>
-                <textarea id="descInput" placeholder="Опишите нарушение" rows="4"></textarea>
+                <textarea id="descInput" placeholder="Например: Работник (Ф.И.О. если знаете) передвигался по территории объекта без каски" rows="4"></textarea>
             </div>
 
             <!-- Кнопка отправки -->
@@ -574,7 +574,7 @@
         const structures = {
             "УДНГ": ["ЦДНГ-2","ЦДНГ-3","ЦДНГ-4","ЦДНГ-5","ЦДНГ-6","ЦДНГ-7","ЦДНГ-8"],
             "УППН": ["ЦППН-1","ЦППН-3","ЦППН-4","ЦППН-5","ЦППН-6"],
-            "ЦППД": ["ЦППД-1","ЦППД-2","ЦППД-3"],
+            "УППД": ["ЦППД-1","ЦППД-2","ЦППД-3"],
             "УПКГ": ["Участок-1","Участок-2","Участок-3"],
             "УЭТ": ["ЦЭРТ-1","ЦЭРТ-2","ЦЭРТ-3","ЦЛАП"],
             "ПСК": ["ПСЦ-1","ПСЦ-2"],
@@ -665,7 +665,7 @@
                 const shopSelect = document.getElementById('shopSelect');
                 const shopInput = document.getElementById('shopInput');
                 document.getElementById('stepShop').style.display = 'block';
-                if (management === "Нет" || management === "Не знаю") {
+                if (management === "Нет в списке" || management === "Не знаю") {
                     shopSelect.style.display = 'none';
                     shopInput.style.display = 'block';
                 } else if (structures[management]) {
