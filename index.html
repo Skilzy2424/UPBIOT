@@ -87,12 +87,10 @@
         .button-icon .icon-box {
             width: 250px;
             height: 250px;
-            background: #333;
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
             cursor: pointer;
             transition: all 0.8s ease;
             box-shadow: 0 8px 25px rgba(0,0,0,0.5);
@@ -101,7 +99,6 @@
 
         .button-icon .icon-box:hover {
             transform: scale(1.05);
-            background: #444;
         }
 
         .button-text {
@@ -299,7 +296,6 @@
             .button-icon .icon-box {
                 width: 200px;
                 height: 200px;
-                font-size: 2.5rem;
             }
 
             .buttons-section {
@@ -321,7 +317,6 @@
             .button-icon .icon-box {
                 width: 180px;
                 height: 180px;
-                font-size: 2rem;
             }
         }
 
@@ -348,8 +343,8 @@
                 <!-- Звонок -->
                 <div class="button-item" id="call-button">
                     <div class="button-icon">
-                        <div class="icon-box" onclick="window.location.href='tel:+79371809021'">
-                            📞
+                        <div class="icon-box" onclick="window.location.href='tel:+79371809021'" style="background: url('assets/images/phone-bg.png') center/cover no-repeat;">
+                            <!-- Вся область заполнена изображением -->
                         </div>
                     </div>
                     <div class="button-text">
@@ -361,8 +356,8 @@
                 <!-- SMS -->
                 <div class="button-item" id="sms-button">
                     <div class="button-icon">
-                        <div class="icon-box" onclick="startSteps('sms')">
-                            💬
+                        <div class="icon-box" onclick="startSteps('sms')" style="background: url('assets/images/sms-bg.png') center/cover no-repeat;">
+                            <!-- Вся область заполнена изображением -->
                         </div>
                     </div>
                     <div class="button-text">
@@ -374,8 +369,8 @@
                 <!-- WhatsApp -->
                 <div class="button-item" id="wa-button">
                     <div class="button-icon">
-                        <div class="icon-box" onclick="startSteps('wa')">
-                            📱
+                        <div class="icon-box" onclick="startSteps('wa')" style="background: url('assets/images/wa-bg.png') center/cover no-repeat;">
+                            <!-- Вся область заполнена изображением -->
                         </div>
                     </div>
                     <div class="button-text">
@@ -387,8 +382,8 @@
                 <!-- Telegram -->
                 <div class="button-item" id="tg-button">
                     <div class="button-icon">
-                        <div class="icon-box" onclick="startSteps('tg')">
-                            ✈️
+                        <div class="icon-box" onclick="startSteps('tg')" style="background: url('assets/images/tg-bg.png') center/cover no-repeat;">
+                            <!-- Вся область заполнена изображением -->
                         </div>
                     </div>
                     <div class="button-text">
@@ -400,8 +395,8 @@
                 <!-- Правила -->
                 <div class="button-item" id="rules-button">
                     <div class="button-icon">
-                        <div class="icon-box" onclick="openGoldenRules()">
-                            📖
+                        <div class="icon-box" onclick="openGoldenRules()" style="background: url('assets/images/rules-bg.png') center/cover no-repeat;">
+                            <!-- Вся область заполнена изображением -->
                         </div>
                     </div>
                     <div class="button-text">
