@@ -8,4 +8,4 @@
 - Пошаговая форма с выбором организации
 
 ## Ссылка
-https://git@github.com:Sngkrpo/UPBIOT.git
+https://sngkrpo.github.io/UPBIOT/
