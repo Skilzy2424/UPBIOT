@@ -26,10 +26,10 @@
             overflow-x: hidden;
         }
 
-        /* Шапка с правильным отображением изображения */
+        /* Шапка с заполненным изображением */
         .header {
-            background: url('assets/images/header-bg.jpg') center/contain no-repeat;
-            background-color: #1a1a1a; /* Фон на случай если изображение не загрузится */
+            background: url('assets/images/header-bg.jpg') center/cover no-repeat;
+            background-color: #121212;
             height: 400px;
             display: flex;
             align-items: center;
@@ -50,18 +50,7 @@
         }
 
         .header-content {
-            text-align: center;
-            z-index: 2;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон для текста */
-            padding: 20px;
-            border-radius: 10px;
-            margin: 0 20px;
-        }
-
-        .header h1 {
-            font-size: 3rem;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+            display: none;
         }
 
         /* Секция с кнопками */
@@ -262,20 +251,11 @@
         @media (max-width: 768px) {
             .header {
                 height: 250px;
-                background-size: contain; /* Сохраняем полное изображение */
+                background-size: cover;
             }
 
             .header.hidden {
                 height: 0;
-            }
-
-            .header h1 {
-                font-size: 2.2rem;
-            }
-
-            .header-content {
-                margin: 0 15px;
-                padding: 15px;
             }
 
             .button-item {
@@ -309,20 +289,11 @@
         @media (max-width: 480px) {
             .header {
                 height: 200px;
-                background-size: contain;
+                background-size: cover;
             }
 
             .header.hidden {
                 height: 0;
-            }
-
-            .header h1 {
-                font-size: 1.8rem;
-            }
-
-            .header-content {
-                margin: 0 10px;
-                padding: 10px;
             }
 
             .button-icon .icon-box {
@@ -339,15 +310,11 @@
         @media (max-width: 320px) {
             .header {
                 height: 150px;
-                background-size: contain;
+                background-size: cover;
             }
             
             .header.hidden {
                 height: 0;
-            }
-
-            .header h1 {
-                font-size: 1.5rem;
             }
 
             .button-icon .icon-box {
@@ -357,7 +324,7 @@
             }
         }
 
-        /* Для очень широких экранов - используем cover чтобы заполнить пространство */
+        /* Для очень широких экранов */
         @media (min-width: 1921px) {
             .header {
                 background-size: cover;
@@ -374,10 +341,10 @@
 </head>
 <body>
     <div class="container">
-        <!-- Шапка -->
+        <!-- Шапка с изображением -->
         <header class="header" id="mainHeader">
             <div class="header-content">
-                <h1>Сообщить о нарушении</h1>
+                <!-- Контент в изображении -->
             </div>
         </header>
 
