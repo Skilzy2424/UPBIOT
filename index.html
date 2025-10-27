@@ -17,28 +17,33 @@
             font-family: Arial, sans-serif;
             background: #121212;
             color: white;
-            overflow-x: hidden;
-            height: 100%;
+            overflow-x: hidden; /* Убираем горизонтальный скролл */
+            width: 100%;
+            position: relative;
         }
 
         html {
-            height: 100%;
+            overflow-x: hidden;
         }
 
-        /* Шапка с фиксированным фоном */
+        /* Шапка с фиксированной шириной */
         .header {
             background: url('assets/images/header-bg.jpg') center/cover no-repeat;
-            background-attachment: fixed; /* Фон зафиксирован */
+            background-attachment: scroll;
             height: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            width: 100%;
+            max-width: 100vw; /* Максимальная ширина = ширина viewport */
+            overflow: hidden;
         }
 
         .header-content {
             text-align: center;
             z-index: 2;
+            width: 100%;
         }
 
         .header h1 {
@@ -53,6 +58,9 @@
             background: #121212;
             position: relative;
             z-index: 1;
+            width: 100%;
+            max-width: 100vw;
+            overflow: hidden;
         }
 
         .button-item {
@@ -63,6 +71,7 @@
             margin: 0 auto 100px;
             min-height: 200px;
             opacity: 0;
+            width: 100%;
         }
 
         .button-item:nth-child(even) {
@@ -87,6 +96,7 @@
             cursor: pointer;
             transition: all 0.6s ease;
             box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            margin: 0 auto; /* Центрируем иконки */
         }
 
         .button-icon .icon-box:hover {
@@ -124,6 +134,7 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             position: relative;
             z-index: 2;
+            width: calc(100% - 40px); /* Учитываем padding */
         }
 
         .step {
@@ -134,6 +145,7 @@
             padding: 25px;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 100%;
         }
 
         .step label {
@@ -152,6 +164,7 @@
             border: 2px solid #ddd;
             font-size: 16px;
             transition: border-color 0.3s;
+            box-sizing: border-box;
         }
 
         .step select:focus, .step input:focus, .step textarea:focus {
@@ -170,6 +183,7 @@
             font-size: 16px;
             width: 100%;
             transition: transform 0.3s;
+            box-sizing: border-box;
         }
 
         .step button:hover {
@@ -180,6 +194,7 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
+            width: 100%;
         }
 
         .group-checkbox label {
@@ -193,6 +208,8 @@
             cursor: pointer;
             font-weight: normal;
             transition: all 0.3s;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .group-checkbox label:hover {
@@ -221,6 +238,7 @@
             width: 100%;
             max-width: 300px;
             transition: transform 0.3s;
+            box-sizing: border-box;
         }
 
         #cancelButton:hover {
@@ -231,9 +249,6 @@
         @media (max-width: 768px) {
             .header {
                 height: 150px;
-                background-attachment: scroll; /* На мобильных отключаем fixed */
-                background-position: center;
-                background-size: cover;
             }
 
             .header h1 {
@@ -244,26 +259,33 @@
                 flex-direction: column !important;
                 text-align: center;
                 margin-bottom: 80px;
+                padding: 0 10px;
             }
 
             .button-icon {
                 flex: none;
                 margin-bottom: 20px;
+                width: 100%;
             }
 
             .button-text {
-                padding: 20px;
+                padding: 20px 10px;
+                width: 100%;
             }
 
             .button-text h3 {
                 font-size: 1.5rem;
+            }
+
+            .form-container {
+                width: calc(100% - 20px);
+                margin: 50px 10px;
             }
         }
 
         @media (max-width: 480px) {
             .header {
                 height: 120px;
-                background-attachment: scroll;
             }
 
             .header h1 {
@@ -274,6 +296,10 @@
                 width: 200px;
                 height: 200px;
                 font-size: 2.5rem;
+            }
+
+            .buttons-section {
+                padding: 30px 10px;
             }
         }
 
@@ -286,180 +312,195 @@
             .header h1 {
                 font-size: 1.3rem;
             }
+
+            .button-icon .icon-box {
+                width: 180px;
+                height: 180px;
+                font-size: 2rem;
+            }
+        }
+
+        /* Гарантируем, что ничего не выходит за пределы экрана */
+        .container {
+            width: 100%;
+            max-width: 100vw;
+            overflow: hidden;
         }
     </style>
 </head>
 <body>
-    <!-- Шапка -->
-    <header class="header">
-        <div class="header-content">
-            <h1>Сообщить о нарушении</h1>
-        </div>
-    </header>
+    <div class="container">
+        <!-- Шапка -->
+        <header class="header">
+            <div class="header-content">
+                <h1>Сообщить о нарушении</h1>
+            </div>
+        </header>
 
-    <!-- Главный контейнер для анимированного контента -->
-    <div id="mainContent">
-        <!-- Секция с кнопками -->
-        <section class="buttons-section">
-            <!-- Звонок -->
-            <div class="button-item" id="call-button">
-                <div class="button-icon">
-                    <div class="icon-box" onclick="window.location.href='tel:+79371809021'">
-                        📞
+        <!-- Главный контейнер для анимированного контента -->
+        <div id="mainContent">
+            <!-- Секция с кнопками -->
+            <section class="buttons-section">
+                <!-- Звонок -->
+                <div class="button-item" id="call-button">
+                    <div class="button-icon">
+                        <div class="icon-box" onclick="window.location.href='tel:+79371809021'">
+                            📞
+                        </div>
+                    </div>
+                    <div class="button-text">
+                        <h3>Прямой звонок</h3>
+                        <p>Немедленная связь с ответственным лицом. Быстрое реагирование на критические ситуации.</p>
                     </div>
                 </div>
-                <div class="button-text">
-                    <h3>Прямой звонок</h3>
-                    <p>Немедленная связь с ответственным лицом. Быстрое реагирование на критические ситуации.</p>
-                </div>
-            </div>
 
-            <!-- SMS -->
-            <div class="button-item" id="sms-button">
-                <div class="button-icon">
-                    <div class="icon-box" onclick="startSteps('sms')">
-                        💬
+                <!-- SMS -->
+                <div class="button-item" id="sms-button">
+                    <div class="button-icon">
+                        <div class="icon-box" onclick="startSteps('sms')">
+                            💬
+                        </div>
+                    </div>
+                    <div class="button-text">
+                        <h3>SMS сообщение</h3>
+                        <p>Отправьте текстовое сообщение с подробным описанием нарушения. Удобно и конфиденциально.</p>
                     </div>
                 </div>
-                <div class="button-text">
-                    <h3>SMS сообщение</h3>
-                    <p>Отправьте текстовое сообщение с подробным описанием нарушения. Удобно и конфиденциально.</p>
-                </div>
-            </div>
 
-            <!-- WhatsApp -->
-            <div class="button-item" id="wa-button">
-                <div class="button-icon">
-                    <div class="icon-box" onclick="startSteps('wa')">
-                        📱
+                <!-- WhatsApp -->
+                <div class="button-item" id="wa-button">
+                    <div class="button-icon">
+                        <div class="icon-box" onclick="startSteps('wa')">
+                            📱
+                        </div>
+                    </div>
+                    <div class="button-text">
+                        <h3>WhatsApp</h3>
+                        <p>Быстрая отправка через популярный мессенджер. Возможность прикрепления фото и документов.</p>
                     </div>
                 </div>
-                <div class="button-text">
-                    <h3>WhatsApp</h3>
-                    <p>Быстрая отправка через популярный мессенджер. Возможность прикрепления фото и документов.</p>
-                </div>
-            </div>
 
-            <!-- Telegram -->
-            <div class="button-item" id="tg-button">
-                <div class="button-icon">
-                    <div class="icon-box" onclick="startSteps('tg')">
-                        ✈️
+                <!-- Telegram -->
+                <div class="button-item" id="tg-button">
+                    <div class="button-icon">
+                        <div class="icon-box" onclick="startSteps('tg')">
+                            ✈️
+                        </div>
+                    </div>
+                    <div class="button-text">
+                        <h3>Telegram</h3>
+                        <p>Безопасная и быстрая связь через Telegram. Поддержка различных форматов сообщений.</p>
                     </div>
                 </div>
-                <div class="button-text">
-                    <h3>Telegram</h3>
-                    <p>Безопасная и быстрая связь через Telegram. Поддержка различных форматов сообщений.</p>
-                </div>
-            </div>
 
-            <!-- Правила -->
-            <div class="button-item" id="rules-button">
-                <div class="button-icon">
-                    <div class="icon-box" onclick="openGoldenRules()">
-                        📖
+                <!-- Правила -->
+                <div class="button-item" id="rules-button">
+                    <div class="button-icon">
+                        <div class="icon-box" onclick="openGoldenRules()">
+                            📖
+                        </div>
+                    </div>
+                    <div class="button-text">
+                        <h3>Золотые правила</h3>
+                        <p>Ознакомьтесь с основными правилами безопасности. Знание - лучшая профилактика нарушений.</p>
                     </div>
                 </div>
-                <div class="button-text">
-                    <h3>Золотые правила</h3>
-                    <p>Ознакомьтесь с основными правилами безопасности. Знание - лучшая профилактика нарушений.</p>
+            </section>
+        </div>
+
+        <!-- Форма (будет появляться при выборе способа сообщения) -->
+        <div class="form-container" id="stepsContainer">
+            <!-- Шаг 1: Организация -->
+            <div id="stepOrganization" class="step">
+                <label>Выберите организацию, к которой относится нарушивший:</label>
+                <div class="group-checkbox">
+                    <label>АО «Самаранефтегаз» <input type="radio" name="organization" value="АО «Самаранефтегаз»" onchange="handleOrganizationChange()"></label>
+                    <label>Подрядная организации <input type="radio" name="organization" value="Подрядная организация" onchange="handleOrganizationChange()"></label>
                 </div>
             </div>
-        </section>
-    </div>
 
-    <!-- Форма (будет появляться при выборе способа сообщения) -->
-    <div class="form-container" id="stepsContainer">
-        <!-- Шаг 1: Организация -->
-        <div id="stepOrganization" class="step">
-            <label>Выберите организацию, к которой относится нарушивший:</label>
-            <div class="group-checkbox">
-                <label>АО «Самаранефтегаз» <input type="radio" name="organization" value="АО «Самаранефтегаз»" onchange="handleOrganizationChange()"></label>
-                <label>Подрядная организации <input type="radio" name="organization" value="Подрядная организация" onchange="handleOrganizationChange()"></label>
+            <!-- Шаг 2: Группа -->
+            <div id="stepGroup" class="step">
+                <label>Выберите группу:</label>
+                <div class="group-checkbox">
+                    <label>Южная группа <input type="radio" name="group" value="Южная" onchange="handleGroupChange()"></label>
+                    <label>Центральная группа <input type="radio" name="group" value="Центральная" onchange="handleGroupChange()"></label>
+                    <label>Северная группа <input type="radio" name="group" value="Северная" onchange="handleGroupChange()"></label>
+                    <label>ОДЦ <input type="radio" name="group" value="ОДЦ" onchange="handleGroupChange()"></label>
+                </div>
             </div>
-        </div>
 
-        <!-- Шаг 2: Группа -->
-        <div id="stepGroup" class="step">
-            <label>Выберите группу:</label>
-            <div class="group-checkbox">
-                <label>Южная группа <input type="radio" name="group" value="Южная" onchange="handleGroupChange()"></label>
-                <label>Центральная группа <input type="radio" name="group" value="Центральная" onchange="handleGroupChange()"></label>
-                <label>Северная группа <input type="radio" name="group" value="Северная" onchange="handleGroupChange()"></label>
-                <label>ОДЦ <input type="radio" name="group" value="ОДЦ" onchange="handleGroupChange()"></label>
+            <!-- Шаг 3: Управление -->
+            <div id="stepManagement" class="step">
+                <label>Выберите управление:</label>
+                <select id="managementSelect" onchange="handleManagementChange()">
+                    <option value="">-- выбрать --</option>
+                    <option>Нет</option>
+                    <option>Не знаю</option>
+                    <option>УДНГ</option>
+                    <option>УППН</option>
+                    <option>ЦППД</option>
+                    <option>УПКГ</option>
+                    <option>УЭТ</option>
+                    <option>ПСК</option>
+                    <option>УКК</option>
+                    <option>Блок Энергетика</option>
+                </select>
             </div>
-        </div>
 
-        <!-- Шаг 3: Управление -->
-        <div id="stepManagement" class="step">
-            <label>Выберите управление:</label>
-            <select id="managementSelect" onchange="handleManagementChange()">
-                <option value="">-- выбрать --</option>
-                <option>Нет</option>
-                <option>Не знаю</option>
-                <option>УДНГ</option>
-                <option>УППН</option>
-                <option>ЦППД</option>
-                <option>УПКГ</option>
-                <option>УЭТ</option>
-                <option>ПСК</option>
-                <option>УКК</option>
-                <option>Блок Энергетика</option>
-            </select>
-        </div>
-
-        <!-- Шаг 4: Подрядная организация -->
-        <div id="stepContractor" class="step">
-            <label>Укажите наименование подрядной организации:</label>
-            <input type="text" id="contractorInput" placeholder="Введите название подрядной организации" oninput="handleContractorInput()">
-        </div>
-
-        <!-- Шаг 5: Цех -->
-        <div id="stepShop" class="step">
-            <label>Выберите или введите цех / участок / лабораторию:</label>
-            <select id="shopSelect" style="display:none;" onchange="handleShopSelect()">
-                <option value="">-- выбрать --</option>
-            </select>
-            <input type="text" id="shopInput" placeholder="Введите вручную" oninput="handleShopInput()">
-        </div>
-
-        <!-- Шаг 6: Область нарушения -->
-        <div id="stepArea" class="step">
-            <label>Область нарушения:</label>
-            <select id="areaSelect" onchange="handleAreaChange()">
-                <option value="">-- выбрать --</option>
-                <option>СИЗ</option>
-                <option>Инструктаж</option>
-                <option>Транспортная безопасность</option>
-                <option>Работы повышенной опасности</option>
-                <option>Пожарная безопасность</option>
-                <option>Передвижение по лестнице</option>
-                <option>Электробезопасность</option>
-            </select>
-        </div>
-
-        <!-- Шаг 7: Место нарушения -->
-        <div id="stepPlace" class="step">
-            <label>Объект/место нарушения:</label>
-            <input type="text" id="placeInput" placeholder="Укажите объект или место">
-            <div id="transportExtra" style="display:none;">
-                <label>Марка или гос.номер транспортного средства:</label>
-                <input type="text" id="transportInput" placeholder="Пример: УПСВ Мухановская, АГЗУ 241">
+            <!-- Шаг 4: Подрядная организация -->
+            <div id="stepContractor" class="step">
+                <label>Укажите наименование подрядной организации:</label>
+                <input type="text" id="contractorInput" placeholder="Введите название подрядной организации" oninput="handleContractorInput()">
             </div>
-        </div>
 
-        <!-- Шаг 8: Описание нарушения -->
-        <div id="stepDesc" class="step">
-            <label>Описание нарушения:</label>
-            <textarea id="descInput" placeholder="Опишите нарушение" rows="4"></textarea>
-        </div>
+            <!-- Шаг 5: Цех -->
+            <div id="stepShop" class="step">
+                <label>Выберите или введите цех / участок / лабораторию:</label>
+                <select id="shopSelect" style="display:none;" onchange="handleShopSelect()">
+                    <option value="">-- выбрать --</option>
+                </select>
+                <input type="text" id="shopInput" placeholder="Введите вручную" oninput="handleShopInput()">
+            </div>
 
-        <!-- Кнопка отправки -->
-        <div id="stepSend" class="step">
-            <button onclick="sendMessage()">Отправить</button>
-        </div>
+            <!-- Шаг 6: Область нарушения -->
+            <div id="stepArea" class="step">
+                <label>Область нарушения:</label>
+                <select id="areaSelect" onchange="handleAreaChange()">
+                    <option value="">-- выбрать --</option>
+                    <option>СИЗ</option>
+                    <option>Инструктаж</option>
+                    <option>Транспортная безопасность</option>
+                    <option>Работы повышенной опасности</option>
+                    <option>Пожарная безопасность</option>
+                    <option>Передвижение по лестнице</option>
+                    <option>Электробезопасность</option>
+                </select>
+            </div>
 
-        <button id="cancelButton" onclick="cancelSteps()">Главное меню</button>
+            <!-- Шаг 7: Место нарушения -->
+            <div id="stepPlace" class="step">
+                <label>Объект/место нарушения:</label>
+                <input type="text" id="placeInput" placeholder="Укажите объект или место">
+                <div id="transportExtra" style="display:none;">
+                    <label>Марка или гос.номер транспортного средства:</label>
+                    <input type="text" id="transportInput" placeholder="Пример: УПСВ Мухановская, АГЗУ 241">
+                </div>
+            </div>
+
+            <!-- Шаг 8: Описание нарушения -->
+            <div id="stepDesc" class="step">
+                <label>Описание нарушения:</label>
+                <textarea id="descInput" placeholder="Опишите нарушение" rows="4"></textarea>
+            </div>
+
+            <!-- Кнопка отправки -->
+            <div id="stepSend" class="step">
+                <button onclick="sendMessage()">Отправить</button>
+            </div>
+
+            <button id="cancelButton" onclick="cancelSteps()">Главное меню</button>
+        </div>
     </div>
 
     <script>
