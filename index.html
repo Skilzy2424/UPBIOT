@@ -458,7 +458,7 @@
                     </div>
                     <div class="button-text">
                         <h3>WhatsApp</h3>
-                        <p>Нажмите на иконку, заполните форму и отправте сообщение через WhatsApp дежурному сотруднику ПБОТОС.</p>
+                        <p>Нажмите на иконку, заполните форму и отправте сообщение через мессенджер дежурному сотруднику ПБОТОС.</p>
                     </div>
                 </div>
 
@@ -471,7 +471,7 @@
                     </div>
                     <div class="button-text">
                         <h3>Telegram</h3>
-                        <p>Нажмите на иконку, заполните форму и отправте сообщение через Telegram дежурному сотруднику ПБОТОС.</p>
+                        <p>Нажмите на иконку, заполните форму и отправте сообщение через мессенджер дежурному сотруднику ПБОТОС.</p>
                     </div>
                 </div>
 
@@ -715,6 +715,9 @@
             document.getElementById('placeLabel').textContent = "Объект/место нарушения:";
             document.getElementById('placeInput').placeholder = "Например: УПН Алакаевская, здание операторной";
             document.getElementById('descInput').placeholder = "Например: Работник (Ф.И.О. если знаете) передвигался по территории объекта без каски";
+            // Сбрасываем display свойств
+            document.getElementById('placeInput').style.display = 'block';
+            document.getElementById('placeLabel').style.display = 'block';
         }
 
         function handleOrganizationChange(){ 
@@ -786,27 +789,46 @@
         function handleAreaChange(){
             const area = document.getElementById('areaSelect').value;
             if (!area) return;
-            const transportExtra = document.getElementById('transportExtra');
-            if (area === "Транспортная безопасность") {
-                transportExtra.style.display = 'block';
-            } else {
-                transportExtra.style.display = 'none';
-            }
             
             // Меняем текст в зависимости от выбранной группы
-            const placeLabel = document.getElementById('placeLabel');
             const descInput = document.getElementById('descInput');
             
             if (selectedGroup === "ОДЦ") {
-                placeLabel.textContent = "Место нарушения:";
-                document.getElementById('placeInput').placeholder = "Например: 4 этаж: лестница или 7 этаж: ландшафт";
-                descInput.placeholder = "Например: Работник (Ф.И.О. если знаете) не держался за поручень при передвижении по лестнице";
+                document.getElementById('placeLabel').textContent = "Место нарушения:";
+                document.getElementById('placeInput').placeholder = "Например: офисное здание, кабинет 305";
+                descInput.placeholder = "Например: Работник (Ф.И.О если знаете) не держался за поручень при передвижении по лестнице";
+                
+                // Для ОДЦ при выборе "Транспортная безопасность"
+                if (area === "Транспортная безопасность") {
+                    // Скрываем основное поле места нарушения
+                    document.getElementById('placeInput').style.display = 'none';
+                    document.getElementById('placeLabel').style.display = 'none';
+                    // Показываем транспортные поля
+                    document.getElementById('transportExtra').style.display = 'block';
+                } else {
+                    // Показываем основное поле места нарушения
+                    document.getElementById('placeInput').style.display = 'block';
+                    document.getElementById('placeLabel').style.display = 'block';
+                    // Скрываем транспортные поля
+                    document.getElementById('transportExtra').style.display = 'none';
+                }
             } else {
-                placeLabel.textContent = "Объект/место нарушения:";
+                document.getElementById('placeLabel').textContent = "Объект/место нарушения:";
                 document.getElementById('placeInput').placeholder = "Например: УПН Алакаевская, здание операторной";
                 descInput.placeholder = "Например: Работник (Ф.И.О. если знаете) передвигался по территории объекта без каски";
+                
+                // Для других групп
+                document.getElementById('placeInput').style.display = 'block';
+                document.getElementById('placeLabel').style.display = 'block';
+                
+                if (area === "Транспортная безопасность") {
+                    document.getElementById('transportExtra').style.display = 'block';
+                } else {
+                    document.getElementById('transportExtra').style.display = 'none';
+                }
             }
             
+            // Всегда показываем шаги места нарушения и описания
             document.getElementById('stepPlace').style.display = 'block';
             document.getElementById('stepDesc').style.display = 'block';
         }
@@ -831,6 +853,10 @@
                 document.getElementById('placeLabel').textContent = "Объект/место нарушения:";
                 document.getElementById('placeInput').placeholder = "Например: УПН Алакаевская, здание операторной";
                 document.getElementById('descInput').placeholder = "Например: Работник (Ф.И.О. если знаете) передвигался по территории объекта без каски";
+                // Сбрасываем display свойств
+                document.getElementById('placeInput').style.display = 'block';
+                document.getElementById('placeLabel').style.display = 'block';
+                document.getElementById('transportExtra').style.display = 'none';
             }
             if (stepId === 'stepGroup') {
                 document.getElementById('managementSelect').value = '';
@@ -896,9 +922,19 @@
                 message += `\nЦех/участок/лаборатория: ${shop}`;
             }
             message += `\nОбласть нарушения: ${area}`;
-            if (group !== "ОДЦ" && place) {
-                message += `\nОбъект/место: ${place}`;
+            
+            // Для ОДЦ указываем место нарушения только если это не "Транспортная безопасность"
+            if (group === "ОДЦ") {
+                if (area !== "Транспортная безопасность" && place) {
+                    message += `\nМесто нарушения: ${place}`;
+                }
+            } else {
+                // Для других групп всегда указываем объект/место
+                if (place) {
+                    message += `\nОбъект/место: ${place}`;
+                }
             }
+            
             if (area === "Транспортная безопасность" && transport) {
                 message += `\nМарка/гос.номер: ${transport}`;
             }
