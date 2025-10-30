@@ -487,6 +487,19 @@
                         <p>Ознакомьтесь с основными правилами безопасности. Знание - лучшая профилактика нарушений.</p>
                     </div>
                 </div>
+
+                <!-- Первая помощь -->
+                <div class="button-item" id="firstaid-button">
+                    <div class="button-icon">
+                        <div class="icon-box" onclick="openFirstAid()" style="background: url('assets/images/firstaid-bg.png') center/cover no-repeat;">
+                            <!-- Вся область заполнена изображением -->
+                        </div>
+                    </div>
+                    <div class="button-text">
+                        <h3>Первая помощь</h3>
+                        <p>Памятка по оказанию первой помощи. Важные инструкции для экстренных ситуаций.</p>
+                    </div>
+                </div>
             </section>
         </div>
 
@@ -876,6 +889,12 @@
 
         function openGoldenRules() {
             const pdfUrl = "assets/docs/golden-rules.pdf";
+            window.open(pdfUrl, '_blank');
+        }
+
+        // Новая функция для открытия памятки по первой помощи
+        function openFirstAid() {
+            const pdfUrl = "assets/docs/first-aid.pdf";
             window.open(pdfUrl, '_blank');
         }
 
